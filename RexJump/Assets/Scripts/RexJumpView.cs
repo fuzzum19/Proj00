@@ -100,6 +100,8 @@ public class RexJumpView : RexJumpElement
         public Text revive_thisText;
         [ReadOnlyAttribute]
         public Vector2 myReviveLastPos;
+		[ReadOnlyAttribute]
+        public Vector2 myMovedPos;
         // public Animator revive_thisAnim;
     }
 
@@ -136,6 +138,7 @@ public class RexJumpView : RexJumpElement
     public Image loaderTwo;
     public Image loaderThree;
     public Image loaderFour;
+    public ObjectPooler[] poolToDisable;
 
     //========================================================================//
 
@@ -164,10 +167,27 @@ public class RexJumpView : RexJumpElement
 	[Space(20)]
 	[Header(" --- Foreground & Background Leaps --- ")]
 	public GameObject endlessScroller;
-	public GameObject[] foregroundOneLeap;
-	public GameObject[] foregroundTwoLeap;
+
+	[System.Serializable]
+	public class ForegroundOneSettings
+	{
+		public GameObject foregroundOneLeap;
+		[ReadOnlyAttribute]
+		public Vector3 foregroundOneStartingPos;
+	}
+	public ForegroundOneSettings[] myFGOne;
+
+	[System.Serializable]
+	public class ForegroundTwoSettings
+	{
+		public GameObject foregroundTwoLeap;
+		[ReadOnlyAttribute]
+		public Vector3 foregroundTwoStartingPos;
+	}
+	public ForegroundTwoSettings[] myFGTwo;
+
+	public Transform mountainGeneratorPos;
 	public GameObject[] backgroundOneLeap;
-    public Transform mountainGeneratorPos;
     public GameObject[] backgroundTwoLeap;
     public GameObject coinPooler;
 	#endregion

@@ -24,7 +24,7 @@ public class ObjectPooler : RexJumpElement
 	public GameObject parentofPooler;
 	public int pooledAmount;
 
-	List<GameObject> objectList;
+	public List<GameObject> objectList;
 
 	void Start()
     {
