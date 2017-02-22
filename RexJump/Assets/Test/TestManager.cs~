@@ -1,0 +1,50 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TestManager : MonoBehaviour {
+
+    public GameObject prefab;
+    public GameObject prefab2;
+    public GameObject poolPoint;
+    public GameObject genPoint;
+    public GameObject poolRange;
+
+    public float platformWidth;
+
+    // Use this for initialization
+	void Start () 
+    {
+        PoolManager.instance.CreatePool (prefab, 10);
+        PoolManager.instance.CreatePool (prefab2, 2);
+
+        platformWidth = prefab.GetComponent<BoxCollider>().size.x;
+	}
+	
+	// Update is called once per frame
+	void Update()
+    {
+        // genPoint.transform.Translate (Vector3.right * Time.deltaTime * 20);
+
+        if (genPoint.transform.position.x < poolRange.transform.position.x)
+        {
+            Vector3 prefabNewPos = new Vector3 (prefab.transform.position.x + platformWidth, prefab.transform.position.y, prefab.transform.position.z);
+
+            PoolManager.instance.ReuseObject(prefab, prefabNewPos, Quaternion.identity);
+
+            genPoint.transform.position = new Vector3 (genPoint.transform.position.x + platformWidth, genPoint.transform.position.y, genPoint.transform.position.z);
+
+            // PoolManager.instance.ReuseObject(prefab, Vector3.zero, Quaternion.identity);
+            // PoolManager.instance.ReuseObject(prefab2, Vector3.zero, Quaternion.identity);
+        }
+
+
+        /*
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PoolManager.instance.ReuseObject(prefab, Vector3.zero, Quaternion.identity);
+            PoolManager.instance.ReuseObject(prefab2, Vector3.zero, Quaternion.identity);
+        }
+        */
+	}
+}

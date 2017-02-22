@@ -1,0 +1,21 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TurnOnButtonAnim : RexJumpElement
+{
+    public bool turnOnAnimator;
+    public Animator thisAnimator;
+
+	void Update()
+    {
+        if (turnOnAnimator == true)
+        {
+            thisAnimator.enabled = true;
+        }
+        else
+        {
+            thisAnimator.enabled = false;
+        }
+	}
+}

@@ -1,0 +1,11 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CamShakeSimple : MonoBehaviour 
+{
+
+    Vector3 originalCameraPosition;
+
+    public Camera mainCamera;
+}

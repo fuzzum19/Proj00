@@ -1,0 +1,23 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LerpBlur : RexJumpElement
+{
+    public float myTime;
+    public float myDuration = 0.5f;
+
+    private void Update()
+    {
+        LerpMyBlur();
+    }
+
+    public void LerpMyBlur()
+    {
+        myTime += Time.deltaTime / myDuration;
+        // app.view.myBlur.downsample = (int)Mathf.Lerp(0, 2, myTime);
+        app.view.myDOF.aperture = Mathf.Lerp(0, 1.0f, myTime);
+        app.view.myBlur.blurSize = Mathf.Lerp(0, 4.0f, myTime);
+        // app.view.myBlur.blurIterations = (int)Mathf.Lerp(1, 4, myTime); 
+    }
+}

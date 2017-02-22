@@ -1,0 +1,52 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class LoadingScene : MonoBehaviour 
+{
+    public CanvasGroup fadeScreen;
+    public Image[] loaders;
+
+    [Range(0f, 1.0f)]
+    public float testAnim;
+
+    public float loadingSceneTime = 0f;
+
+
+	// Use this for initialization
+	void Start () 
+    {
+
+	}
+	
+	// Update is called once per frame
+	void Update()
+    {
+        loadingSceneTime += Time.deltaTime;
+
+        if (loadingSceneTime >= 0.15f)
+        {
+            SceneLoader(loaders[0], 0.15f);
+        }
+        if (loadingSceneTime >= 0.30f)
+        {
+            SceneLoader(loaders[1], 0.15f);
+        }
+        if (loadingSceneTime >= 0.45f)
+        {
+            SceneLoader(loaders[2], 0.15f);
+        }
+        if (loadingSceneTime >= 0.60f)
+        {
+            SceneLoader(loaders[3], 0.15f);
+        }
+	}
+
+    private void SceneLoader(Image myLoaders, float duration)
+    {
+        float t = Mathf.PingPong(Time.deltaTime, duration) / duration;
+
+        myLoaders.fillAmount = Mathf.Lerp(myLoaders.fillAmount, 1.0f, t);
+    }
+}

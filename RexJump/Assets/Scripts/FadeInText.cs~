@@ -1,0 +1,15 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class FadeInText : MonoBehaviour 
+{
+    public Text myText;
+
+    void Update () 
+    {
+        // myText.color = Color.Lerp (myText.color, Color.clear, 0.25f * Time.deltaTime);
+        myText.CrossFadeAlpha(1f, 0.125f, true);
+    }
+}

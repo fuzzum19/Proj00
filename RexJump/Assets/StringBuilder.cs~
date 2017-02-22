@@ -1,0 +1,23 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MyStringBuilder : MonoBehaviour {
+
+    public string content;
+    
+	// Use this for initialization
+	void Start () 
+    {
+		content = "9";
+        Debug.Log(content);
+        content += "9";
+        Debug.Log(content);
+	}
+	
+	// Update is called once per frame
+	void Update () 
+    {
+		
+	}
+}

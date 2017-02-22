@@ -1,0 +1,32 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class FadeOutText : MonoBehaviour 
+{
+    private float t;
+
+    public bool buttonTapped { get; set; }
+    public CanvasGroup thisCanvas;
+    public float duration;
+
+    void Start()
+    {
+        buttonTapped = false;
+    }
+
+	void Update()
+    {
+        t = Mathf.PingPong(Time.deltaTime, duration) / duration;
+
+        if (buttonTapped == true)
+        {
+            thisCanvas.alpha = Mathf.Lerp(thisCanvas.alpha, 0.01f + Mathf.Epsilon, t);
+            if (thisCanvas.alpha == 0.0f)
+            {
+                Mathf.Round(thisCanvas.alpha);
+            }
+        }
+	}
+}

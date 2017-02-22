@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - killPlayer
+  - coins
+  - platform
+  - FG
+  - coinsOff
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Ground
+  - Player
+  - Background
+  - Foreground
+  - Loading
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: BackgroundSort
+    uniqueID: 3599444775
+    locked: 0
+  - name: MiddlegroundSort
+    uniqueID: 3185717891
+    locked: 0
+  - name: Player
+    uniqueID: 995803385
+    locked: 0
+  - name: ForegroundSort
+    uniqueID: 1306501029
+    locked: 0
+  - name: UI
+    uniqueID: 2813586881
+    locked: 0
