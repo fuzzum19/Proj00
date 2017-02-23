@@ -106,3 +106,7 @@ E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
 E:\Mark\Apps\Proj00\RexJump\obj\Debug\Assembly-CSharp-Editor-firstpass.csprojResolveAssemblyReference.cache
 E:\Mark\Apps\Proj00\RexJump\obj\Debug\Assembly-CSharp-Editor-firstpass.dll
 E:\Mark\Apps\Proj00\RexJump\obj\Debug\Assembly-CSharp-Editor-firstpass.pdb
+E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.Advertisements.dll
+E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.Purchasing.dll
+E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.Advertisements.xml
+E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.Purchasing.xml

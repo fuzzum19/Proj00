@@ -18,10 +18,13 @@ public class RexJumpView : RexJumpElement
 
     [Space(20)]
     [Header(" --- StartScreen UI--- ")]
+	[Space(10)]
     public Text scoreText;
     public Text coinText;
     public bool tapToPlayStartLoop = true;
-    [System.Serializable]
+
+	
+	[System.Serializable]
     public class StartScreen
     {
         public CanvasGroup start_thisCanvasGroup;
@@ -31,6 +34,7 @@ public class RexJumpView : RexJumpElement
 
     public StartScreen[] myStartScreenClass;
 
+	
     [System.Serializable]
     public class GameTitle
     {
@@ -42,6 +46,7 @@ public class RexJumpView : RexJumpElement
 
     public GameTitle[] myGameTitleClass;
 
+	
     [System.Serializable]
     public class GameModesText
     {
@@ -65,7 +70,10 @@ public class RexJumpView : RexJumpElement
 
     [Space(10)]
     [Header(" --- FailScreen UI --- ")]
+	[Space(10)]
     public bool failScreenStartLoop = true;
+
+
     [System.Serializable]
     public class FailScreen
     {
@@ -81,15 +89,18 @@ public class RexJumpView : RexJumpElement
 
     [Space(10)]
     [Header(" --- ReviveScreen UI --- ")]
+	[Space(10)]
     public bool reviveScreenStartLoop = true;
     [ReadOnlyAttribute]
     public float reviveUIPercentToMove_X;
     [ReadOnlyAttribute]
     public float reviveUIPercentToMove_Y;
+
     public Image regressBar;
     public float barTimeAmount;
     [ReadOnlyAttribute]
     public float barTime;
+
 
     [System.Serializable]
     public class ReviveScreen
@@ -109,8 +120,9 @@ public class RexJumpView : RexJumpElement
 
     //========================================================================//
 
-    [Space(10)]
+    [Space(20)]
     [Header(" --- ResultsScreen UI --- ")]
+	[Space(10)]
     public bool resultScreenStartLoop = true;
     [ReadOnlyAttribute]
     public float resultsUIPercentToMove_X;
@@ -134,22 +146,27 @@ public class RexJumpView : RexJumpElement
 
     [Space(20)]
     [Header(" --- Loading Screen Settings --- ")]
+	[Space(10)]
     public Image loaderOne;
     public Image loaderTwo;
     public Image loaderThree;
     public Image loaderFour;
     public ObjectPooler[] poolToDisable;
+//    [ReadOnlyAttribute]
+//    public bool gameIsLoading;
 
     //========================================================================//
 
 	[Space(20)]
 	[Header(" --- Environment Spawn Settings --- ")]
+	[Space(10)]
 	public Transform maxHeightPlatforms;
 	public Transform platformGeneratorPos;
 	public Transform platformGenRange;
 
 	[Space(20)]
 	[Header(" --- Environment Pooling View --- ")]
+	[Space(10)]
     [Range(0f, 1.0f)]
     public float level_1_cactus_00_difficulty;
     [Range(0f, 1.0f)]
@@ -160,13 +177,17 @@ public class RexJumpView : RexJumpElement
     #region EndPool
     [Space(20)]
     [Header(" --- EndPool --- ")]
+	[Space(10)]
     public GameObject[] endPools;
     #endregion
 
 	#region Parallax Pool
 	[Space(20)]
 	[Header(" --- Foreground & Background Leaps --- ")]
+	[Space(10)]
+
 	public GameObject endlessScroller;
+
 
 	[System.Serializable]
 	public class ForegroundOneSettings
@@ -176,6 +197,7 @@ public class RexJumpView : RexJumpElement
 		public Vector3 foregroundOneStartingPos;
 	}
 	public ForegroundOneSettings[] myFGOne;
+
 
 	[System.Serializable]
 	public class ForegroundTwoSettings
@@ -187,14 +209,35 @@ public class RexJumpView : RexJumpElement
 	public ForegroundTwoSettings[] myFGTwo;
 
 	public Transform mountainGeneratorPos;
-	public GameObject[] backgroundOneLeap;
-    public GameObject[] backgroundTwoLeap;
+
+
+	[System.Serializable]
+	public class BackgroundOneSettings
+	{
+		public GameObject backgroundOneLeap;
+		[ReadOnlyAttribute]
+		public Vector3 backgroundOneStartingPos;
+	}
+	public BackgroundOneSettings[] myBGOne;
+
+
+	[System.Serializable]
+	public class BackgroundTwoSettings
+	{
+		public GameObject backgroundTwoLeap;
+		[ReadOnlyAttribute]
+		public Vector3 backgroundTwoStartingPos;
+	}
+	public BackgroundTwoSettings[] myBGTwo;
+
+	[Space(10)]
     public GameObject coinPooler;
 	#endregion
 
     #region GUI
 	[Space(20)]
 	[Header(" --- InGame Screen Elements --- ")]
+	[Space(10)]
 	public Text hiScoreText;
 
     
@@ -211,6 +254,7 @@ public class RexJumpView : RexJumpElement
 
     [Space(20)]
     [Header(" --- PostImage Effects View --- ")]
+	[Space(10)]
     // LerpMyBlur()
     public Animator playerAnimator;
     public BlurOptimized myBlur;

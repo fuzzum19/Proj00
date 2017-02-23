@@ -27,6 +27,7 @@ public class RexJumpController : RexJumpElement
         PlayerRevive,
         PlayerResults,
         PlayerLoading,
+        PlayerLoadingExit
     }
 
     public GameStates myGameStates;
@@ -40,6 +41,7 @@ public class RexJumpController : RexJumpElement
         SceneRevive,
         SceneResults,
         SceneLoading,
+        SceneLoadingExit
     }
 
     public UIStates myUIStates;
@@ -349,26 +351,15 @@ public class RexJumpController : RexJumpElement
                 app.model.sceneFailTime = 0f;
                 app.model.sceneReviveTime = 0f;
                 app.model.sceneResultsTime = 0f;
-				app.model.sceneLoadingTime += Time.deltaTime;
+				app.model.sceneLoadingTime = 0f;
+				app.model.sceneExitLoadingTime = 0f;
 
-				// Reveal loading
-				if (app.model.sceneLoadingTime >= 3.00f)
-                {
-                    LerpFillValue(app.view.loaderFour, 0.25f, false);
-                }
-                if (app.model.sceneLoadingTime >= 3.25f)
-                {
-                    LerpFillValue(app.view.loaderThree, 0.25f, false);
-                }
-                if (app.model.sceneLoadingTime >= 3.5f)
-                {
-                    LerpFillValue(app.view.loaderTwo, 0.25f, false);
-                }
-                if (app.model.sceneLoadingTime >= 3.75f)
-                {
-                    LerpFillValue(app.view.loaderOne, 0.25f, false);
-                }
+				app.view.loaderOne.fillAmount = 0f;
+				app.view.loaderTwo.fillAmount = 0f;
+				app.view.loaderThree.fillAmount = 0f;
+				app.view.loaderFour.fillAmount = 0f;
 
+                // Fade in Game title
                 for (int i = 0; i < app.view.myGameTitleClass.Length; i++)
                 {
                     FadeMyObject(app.view.myGameTitleClass[i].titleSprite, 0.15f, true);
@@ -381,7 +372,6 @@ public class RexJumpController : RexJumpElement
                     FadeMyUI(app.view.myStartScreenClass[4].start_thisCanvasGroup, 0.15f, true);
                     FadeMyUI(app.view.myStartScreenClass[5].start_thisCanvasGroup, 0.15f, true);
                     FadeMyUI(app.view.myStartScreenClass[6].start_thisCanvasGroup, 0.15f, true);
-                    LerpMyBlur(false);
                 }
 
                 if (app.model.sceneStartNotIdleTime >= 0.50f)
@@ -500,7 +490,7 @@ public class RexJumpController : RexJumpElement
                 app.model.sceneFailTime = 0f;
                 app.model.sceneReviveTime = 0f;
                 app.model.sceneResultsTime = 0f;
-				app.model.sceneLoadingTime += Time.deltaTime;
+				app.model.sceneLoadingTime = 0f;
 
                 for (int i = 0; i < app.view.myStartScreenClass.Length; i++)
                 {
@@ -574,6 +564,7 @@ public class RexJumpController : RexJumpElement
 
                 // Fade out my Tap to Play
                 FadeMyUI(app.view.myStartScreenClass[3].start_thisCanvasGroup, 0.10f, false);
+
                 FadeMyUI(app.view.myStartScreenClass[4].start_thisCanvasGroup, 0.10f, false);
                 FadeMyUI(app.view.myStartScreenClass[5].start_thisCanvasGroup, 0.10f, false);
                 FadeMyUI(app.view.myStartScreenClass[6].start_thisCanvasGroup, 0.10f, false);
@@ -882,294 +873,427 @@ public class RexJumpController : RexJumpElement
                 app.model.sceneResultsTime = 0f;
                 app.model.sceneLoadingTime += Time.deltaTime;
 
-                if (app.model.sceneLoadingTime >= 0.25f)
+                if (app.model.sceneLoadingTime >= 0.15f)
                 {
-                    LerpFillValue(app.view.loaderOne, 0.25f, true);
+                    LerpFillValue(app.view.loaderOne, 0.15f, true);
                 }
-                if (app.model.sceneLoadingTime >= 0.50f)
+                if (app.model.sceneLoadingTime >= 0.30f)
                 {
-                    LerpFillValue(app.view.loaderTwo, 0.25f, true);
+                    LerpFillValue(app.view.loaderTwo, 0.15f, true);
                 }
-                if (app.model.sceneLoadingTime >= 0.75f)
+                if (app.model.sceneLoadingTime >= 0.45f)
                 {
-                    LerpFillValue(app.view.loaderThree, 0.25f, true);
+                    LerpFillValue(app.view.loaderThree, 0.15f, true);
                 }
-                if (app.model.sceneLoadingTime >= 1.00f)
+                if (app.model.sceneLoadingTime >= 0.60f)
                 {
-                    LerpFillValue(app.view.loaderFour, 0.25f, true);
+                    LerpFillValue(app.view.loaderFour, 0.15f, true);
                 }
-                if (app.model.sceneLoadingTime >= 2.5f)
+
+				if (app.model.sceneLoadingTime >= 1.75f)
+               	{
+               		app.model.myUIStateSelector = 11;
+               	}
+
+            break;
+
+            #endregion
+		// ++++++++++++++++++++++++++++
+			#region GameStates.PlayerLoadingExit
+
+            case GameStates.PlayerLoadingExit:
+
+				app.model.sceneStartIdleTime = 0f;
+                app.model.sceneStartNotIdleTime = 0f;
+                app.model.scenePlayTime = 0f;
+                app.model.sceneFailTime = 0f;
+                app.model.sceneReviveTime = 0f;
+                app.model.sceneResultsTime = 0f;
+                app.model.sceneLoadingTime = 0f;
+                app.model.sceneExitLoadingTime += Time.deltaTime;
+
+				if (app.model.sceneExitLoadingTime >= 0.25f)
                 {
-                    for (int i = 0; i < app.view.myResultsScreenClass.Length; i++)
+                	// Disable intertactable in Results UI
+                    for (int a = 0; a < app.view.myResultsScreenClass.Length; a++)
                     {
-                        if (app.view.myResultsScreenClass[i].results_thisCanvasGroup == null)
+                        if (app.view.myResultsScreenClass[a].results_thisCanvasGroup == null)
                         {
                             continue;
                         }
                         else
                         {
-                            app.view.myResultsScreenClass[i].results_thisCanvasGroup.alpha = 0f;
-                            app.view.myResultsScreenClass[i].results_thisCanvasGroup.blocksRaycasts = false;
-                            app.view.myResultsScreenClass[i].results_thisCanvasGroup.interactable = false;
+                            app.view.myResultsScreenClass[a].results_thisCanvasGroup.alpha = 0f;
+                            app.view.myResultsScreenClass[a].results_thisCanvasGroup.blocksRaycasts = false;
+                            app.view.myResultsScreenClass[a].results_thisCanvasGroup.interactable = false;
                         }
                     }
 
-                    app.model.playerIdleTime = 0f;
+                    // Disable interactalbe in Revive UI
+                    for (int b = 0; b < app.view.myReviveScreenClass.Length; b++)
+                    {
+                    	if (app.view.myReviveScreenClass[b].revive_thisCanvasGroup == null)
+                    	{
+                    		continue;
+                    	}
+                    	else
+                    	{
+                    		app.view.myReviveScreenClass[b].revive_thisCanvasGroup.blocksRaycasts = false;
+                    		app.view.myReviveScreenClass[b].revive_thisCanvasGroup.interactable = false;
+                    	}
+                    }
 
-                    // Bring back App title
+                    // Disable interactable in Failed UI
+                    for (int c = 0; c < app.view.myFailScreenClass.Length; c++)
+                    {
+                    	if (app.view.myFailScreenClass[c].fail_thisCanvasGroup == null)
+                    	{
+                    		continue;
+                    	}
+                    	else
+                    	{
+                    		app.view.myFailScreenClass[c].fail_thisCanvasGroup.blocksRaycasts = false;
+                    		app.view.myFailScreenClass[c].fail_thisCanvasGroup.interactable = false;
+                    	}
+                    }
+
+                    app.model.playerIdleTime = 0f;
+                }
+				
+				if (app.model.sceneExitLoadingTime >= 0.50f)
+				{
+					// Bring back App title
                     for (int x = 0; x < app.view.myGameTitleClass.Length; x++)
                     {
                         app.view.myGameTitleClass[x].titleObj.transform.position = app.view.myGameTitleClass[x].startingPos;
                         app.view.myGameTitleClass[x].titleObj.SetActive (true);
                     }
 
+                    // Enable Starting Platform
                     app.view.startingPlatform.SetActive (true);
+
+                    // Reset Generator
                     app.view.endlessScroller.transform.position = Vector3.zero;
+
+                    // Reset Camera
                     app.view.mainCamera.transform.position = new Vector3 (0f, 0f, -15f);
 
-                }
-				
-				if (app.model.sceneLoadingTime >= 2.75f)
-				{
-					if (app.view.loaderFour.fillAmount >= 0.99f)
+	            	// Fade out my Coin UI
+	                FadeMyUI(app.view.myStartScreenClass[1].start_thisCanvasGroup, 0.15f, false);
+	                FadeMyUI(app.view.myStartScreenClass[2].start_thisCanvasGroup, 0.15f, false);
+
+	                // Remove Blur
+					LerpMyBlur(false);
+
+					#region Reset Revive UI
+					// Reset Revive UI to original position
+					for (int a = 0; a < app.view.myReviveScreenClass.Length; a++)
+	            	{
+						app.view.myReviveScreenClass[a].revive_thisRectTransform.anchoredPosition = app.view.myReviveScreenClass[a].myMovedPos;
+	            	}
+
+	            	// Reset revive bar
+	            	app.view.regressBar.fillAmount = 1.0f;
+					app.view.barTime = app.view.barTimeAmount;
+	                #endregion
+
+	                #region Reset Environment
+	            	// Return active pools to inactive
+	            	for (int b = 0; b < app.view.poolToDisable.Length; b++)
+	            	{
+	            		for (int c = 0; c < app.view.poolToDisable[b].objectList.Count; c++)
+	            		{
+							if (app.view.poolToDisable[b].objectList[c].activeInHierarchy == true)
+							{
+								app.view.poolToDisable[b].objectList[c].SetActive(false);
+							}
+	            		}
+	            	}
+
+	            	// Reset Platform generator pos
+					app.view.platformGeneratorPos.transform.position = new Vector3 (0f, app.view.platformGeneratorPos.transform.position.y, app.view.platformGeneratorPos.transform.position.z);
+
+					// Reset Foreground Ones
+					for (int d = 0; d < app.view.myFGOne.Length; d++)
 					{
-						// Reset Revive UI to original position
-						for (int x = 0; x < app.view.myReviveScreenClass.Length; x++)
-		            	{
-							app.view.myReviveScreenClass[x].revive_thisRectTransform.anchoredPosition = app.view.myReviveScreenClass[x].myMovedPos;
-		            	}
-
-		            	// Return active pools to inactive
-		            	for (int i = 0; i < app.view.poolToDisable.Length; i++)
-		            	{
-		            		for (int j = 0; j < app.view.poolToDisable[i].objectList.Count; j++)
-		            		{
-								if (app.view.poolToDisable[i].objectList[j].activeInHierarchy == true)
-								{
-									app.view.poolToDisable[i].objectList[j].SetActive(false);
-								}
-		            		}
-		            	}
-
-		            	// Reset Platform generator pos
-						app.view.platformGeneratorPos.transform.position = new Vector3 (0f, app.view.platformGeneratorPos.transform.position.y, app.view.platformGeneratorPos.transform.position.z);
-
-						// Reset Foreground one pos
-						for (int y = 0; y < app.view.myFGOne.Length; y++)
-						{
-							app.view.myFGOne[y].foregroundOneLeap.transform.position = app.view.myFGOne[y].foregroundOneStartingPos;
-							app.view.myFGTwo[y].foregroundTwoLeap.transform.position = app.view.myFGTwo[y].foregroundTwoStartingPos;
-						}
-
-						Debug.Log("done loading");
-						Debug.Log(SceneManager.GetActiveScene().name);
-						app.model.myUIStateSelector = 0;
+						app.view.myFGOne[d].foregroundOneLeap.transform.position = app.view.myFGOne[d].foregroundOneStartingPos;
 					}
+
+					// Reset Foreground Twos
+					for (int e = 0; e < app.view.myFGTwo.Length; e++)
+					{
+						app.view.myFGTwo[e].foregroundTwoLeap.transform.position = app.view.myFGTwo[e].foregroundTwoStartingPos;
+					}
+
+					// Reset Background ones
+					for (int f = 0; f < app.view.myBGOne.Length; f++)
+					{
+						app.view.myBGOne[f].backgroundOneLeap.transform.position = app.view.myBGOne[f].backgroundOneStartingPos;
+					}
+
+					// Reset background twos
+					for (int g = 0; g < app.view.myBGTwo.Length; g++)
+					{
+						app.view.myBGTwo[g].backgroundTwoLeap.transform.position = app.view.myBGTwo[g].backgroundTwoStartingPos;
+					}
+					#endregion
+
+					for (int a = 0; a < app.view.myStartScreenClass.Length; a++)
+	            	{
+	            		app.view.myStartScreenClass[a].start_thisCanvasGroup.alpha = 0f;
+						app.view.myStartScreenClass[a].start_thisCanvasGroup.interactable = false;
+	                    app.view.myStartScreenClass[a].start_thisCanvasGroup.blocksRaycasts = false;
+	            	}
+
+					if (app.model.sceneExitLoadingTime >= 0.75f)
+	                {
+	                    LerpFillValue(app.view.loaderFour, 0.25f, false);
+	                }
+	                if (app.model.sceneExitLoadingTime >= 1.0f)
+	                {
+	                    LerpFillValue(app.view.loaderThree, 0.25f, false);
+	                }
+	                if (app.model.sceneExitLoadingTime >= 1.25f)
+	                {
+	                    LerpFillValue(app.view.loaderTwo, 0.25f, false);
+	                }
+	                if (app.model.sceneExitLoadingTime >= 1.5f)
+	                {
+	                    LerpFillValue(app.view.loaderOne, 0.25f, false);
+	                }
+
+	                // Make sure loaders are not visible after loading
+					if (app.view.loaderOne.fillAmount <= 0.01f && app.view.loaderTwo.fillAmount <= 0.01f && app.view.loaderThree.fillAmount <= 0.01f && app.view.loaderFour.fillAmount <= 0.01f)
+	                {
+						Debug.Log("done loading");
+
+						app.model.myUIStateSelector = 0;
+	                }
 				}
 
-                break;
+            break;
 
             #endregion
         }
     }
 
     //========================================================================//
-    private void InitializeUISelector()
-    {
-        if (app.model.myUIStateSelector == 0)
-        {
-            myUIStates = UIStates.SceneStart;
-        }
-        else if (app.model.myUIStateSelector == 1)
-        {
-            myUIStates = UIStates.SceneStartPlay;
-        }
-        else if (app.model.myUIStateSelector == 2)
-        {
-            myUIStates = UIStates.ScenePlay;
-        }
-        else if (app.model.myUIStateSelector == 3)
-        {
-            myUIStates = UIStates.SceneFail;
-        }
-        else if (app.model.myUIStateSelector == 4)
-        {
-            myUIStates = UIStates.SceneRevive;
-        }
-        else if (app.model.myUIStateSelector == 5)
-        {
-            myUIStates = UIStates.SceneResults;
-        }
-        else if (app.model.myUIStateSelector == 10)
-        {
-            myUIStates = UIStates.SceneLoading;
-        }
+    private void InitializeUISelector ()
+	{
+		if (app.model.myUIStateSelector == 0)
+		{
+			myUIStates = UIStates.SceneStart;
+		}
+		else if (app.model.myUIStateSelector == 1)
+		{
+			myUIStates = UIStates.SceneStartPlay;
+		}
+		else if (app.model.myUIStateSelector == 2)
+		{
+			myUIStates = UIStates.ScenePlay;
+		}
+		else if (app.model.myUIStateSelector == 3)
+		{
+			myUIStates = UIStates.SceneFail;
+		}
+		else if (app.model.myUIStateSelector == 4)
+		{
+			myUIStates = UIStates.SceneRevive;
+		}
+		else if (app.model.myUIStateSelector == 5)
+		{
+			myUIStates = UIStates.SceneResults;
+		}
+		else if (app.model.myUIStateSelector == 10)
+		{
+			myUIStates = UIStates.SceneLoading;
+		}
+		else if (app.model.myUIStateSelector == 11)
+		{
+			myUIStates = UIStates.SceneLoadingExit;
+		}
     }
 
     //========================================================================//
 
     #region StartScreen_UI
 
-    private void StartScreenUIAlphaZero()
-    {
-        if (app.view.tapToPlayStartLoop)
-        {
+    private void StartScreenUIAlphaZero ()
+	{
+		if (app.view.tapToPlayStartLoop)
+		{
 			// Iterate each Start screen UI
-            for (int i = 0; i < app.view.myStartScreenClass.Length; i++)
-            {
-                // Canvas Group - Interactable
-                if (app.view.myStartScreenClass[i].start_thisCanvasGroup == null)
-                {
-                    continue;
-                }
-                else if (app.view.myStartScreenClass[i].start_thisCanvasGroup == app.view.myStartScreenClass[0].start_thisCanvasGroup)
-                {
-                    app.view.myStartScreenClass[0].start_thisCanvasGroup.alpha = 0f;
-                    app.view.myStartScreenClass[0].start_thisCanvasGroup.interactable = false;
-                    continue;
-                }
-                else if (app.view.myStartScreenClass[i].start_thisCanvasGroup == app.view.myStartScreenClass[1].start_thisCanvasGroup)
-                {
-                    app.view.myStartScreenClass[1].start_thisCanvasGroup.alpha = 0f;
-                    app.view.myStartScreenClass[0].start_thisCanvasGroup.interactable = false;
-                    continue;
-                }
-                else if (app.view.myStartScreenClass[i].start_thisCanvasGroup == app.view.myStartScreenClass[2].start_thisCanvasGroup)
-                {
-                    app.view.myStartScreenClass[2].start_thisCanvasGroup.alpha = 0f;
-                    app.view.myStartScreenClass[0].start_thisCanvasGroup.interactable = false;
-                    continue;
-                }
-                else
-                {
-                    app.view.myStartScreenClass[i].start_thisCanvasGroup.alpha = 0.0f;
-                    app.view.myStartScreenClass[i].start_thisCanvasGroup.interactable = true;
-                }
+			for (int i = 0; i < app.view.myStartScreenClass.Length; i++)
+			{
+				// Canvas Group - Interactable
+				if (app.view.myStartScreenClass [i].start_thisCanvasGroup == null)
+				{
+					continue;
+				}
+				else if (app.view.myStartScreenClass [i].start_thisCanvasGroup == app.view.myStartScreenClass [0].start_thisCanvasGroup)
+				{
+					app.view.myStartScreenClass [0].start_thisCanvasGroup.alpha = 0f;
+					app.view.myStartScreenClass [0].start_thisCanvasGroup.interactable = false;
+					continue;
+				}
+				else if (app.view.myStartScreenClass [i].start_thisCanvasGroup == app.view.myStartScreenClass [1].start_thisCanvasGroup)
+				{
+					app.view.myStartScreenClass [1].start_thisCanvasGroup.alpha = 0f;
+					app.view.myStartScreenClass [1].start_thisCanvasGroup.interactable = false;
+					continue;
+				}
+				else if (app.view.myStartScreenClass [i].start_thisCanvasGroup == app.view.myStartScreenClass [2].start_thisCanvasGroup)
+				{
+					app.view.myStartScreenClass [2].start_thisCanvasGroup.alpha = 0f;
+					app.view.myStartScreenClass [2].start_thisCanvasGroup.interactable = false;
+					continue;
+				}
+				else
+				{
+					app.view.myStartScreenClass [i].start_thisCanvasGroup.alpha = 0.0f;
+					app.view.myStartScreenClass [i].start_thisCanvasGroup.interactable = true;
+				}
 
-                // Button
-                if (app.view.myStartScreenClass[i].start_thisButton == null)
-                {
-                    continue;
-                }
-                else if (app.view.myStartScreenClass[i].start_thisButton == app.view.myStartScreenClass[0].start_thisButton)
-                {
-                    continue;
-                }
-                else if (app.view.myStartScreenClass[i].start_thisButton == app.view.myStartScreenClass[1].start_thisButton)
-                {
-                    continue;
-                }
-                else if (app.view.myStartScreenClass[i].start_thisButton == app.view.myStartScreenClass[2].start_thisButton)
-                {
-                    continue;
-                }
-                else
-                {
-                    app.view.myStartScreenClass[i].start_thisButton.enabled = true;
-                }
-            }
+				// Button
+				if (app.view.myStartScreenClass [i].start_thisButton == null)
+				{
+					continue;
+				}
+				else if (app.view.myStartScreenClass [i].start_thisButton == app.view.myStartScreenClass [0].start_thisButton)
+				{
+					continue;
+				}
+				else if (app.view.myStartScreenClass [i].start_thisButton == app.view.myStartScreenClass [1].start_thisButton)
+				{
+					continue;
+				}
+				else if (app.view.myStartScreenClass [i].start_thisButton == app.view.myStartScreenClass [2].start_thisButton)
+				{
+					continue;
+				}
+				else
+				{
+					app.view.myStartScreenClass [i].start_thisButton.enabled = true;
+				}
+			}
 
 			// Iterate each Game modes text
-            for (int x = 0; x < app.view.myGameModesText.Length; x++)
-            {
-                // Canvas Group - Text Mode
-                if (app.view.myGameModesText[x].modeCG == null)
-                {
-                    continue;
-                }
-                else
-                {
-                    app.view.myGameModesText[x].modeCG.alpha = 0f;
-                    app.view.myGameModesText[x].modeCG.interactable = false;
-                    app.view.myGameModesText[x].modeCG.blocksRaycasts = false;
-                }
-            }
+			for (int x = 0; x < app.view.myGameModesText.Length; x++)
+			{
+				// Canvas Group - Text Mode
+				if (app.view.myGameModesText [x].modeCG == null)
+				{
+					continue;
+				}
+				else
+				{
+					app.view.myGameModesText [x].modeCG.alpha = 0f;
+					app.view.myGameModesText [x].modeCG.interactable = false;
+					app.view.myGameModesText [x].modeCG.blocksRaycasts = false;
+				}
+			}
 
-            // Move away from center
-            app.view.myGameModesText[1].modeRectTransform.anchoredPosition = new Vector2(app.view.myGameModesText[1].modeRectTransform.anchoredPosition.x + Screen.width / 2.0f, app.view.myGameModesText[1].modeRectTransform.anchoredPosition.y);
+			// Move away from center
+			app.view.myGameModesText [1].modeRectTransform.anchoredPosition = new Vector2 (app.view.myGameModesText [1].modeRectTransform.anchoredPosition.x + Screen.width / 2.0f, app.view.myGameModesText [1].modeRectTransform.anchoredPosition.y);
 
-            // Get vector values
-            app.view.gameModeStartingPos = app.view.myGameModesText[0].modeRectTransform.anchoredPosition;
-            app.view.gameModeMoveLeft = new Vector2(0 - Screen.width / 2.0f, app.view.myGameModesText[0].modeRectTransform.anchoredPosition.y);
-            app.view.gameModeMoveRight = new Vector2(0 + Screen.width / 2.0f, app.view.myGameModesText[0].modeRectTransform.anchoredPosition.y);   
+			// Get vector values
+			app.view.gameModeStartingPos = app.view.myGameModesText [0].modeRectTransform.anchoredPosition;
+			app.view.gameModeMoveLeft = new Vector2 (0 - Screen.width / 2.0f, app.view.myGameModesText [0].modeRectTransform.anchoredPosition.y);
+			app.view.gameModeMoveRight = new Vector2 (0 + Screen.width / 2.0f, app.view.myGameModesText [0].modeRectTransform.anchoredPosition.y);   
 
-            // Change Strings
-            app.view.myGameModesText[0].modeText.text = app.model.GameModeClassicString();
-            app.view.myGameModesText[1].modeText.text = app.model.GameModeZenString();
+			// Change Strings
+			app.view.myGameModesText [0].modeText.text = app.model.GameModeClassicString ();
+			app.view.myGameModesText [1].modeText.text = app.model.GameModeZenString ();
 
-            // Get title starting values
-            for (int z = 0; z < app.view.myGameTitleClass.Length; z++)
-            {
-                app.view.myGameTitleClass[z].startingPos = new Vector3 (app.view.myGameTitleClass[z].titleObj.transform.position.x, app.view.myGameTitleClass[z].titleObj.transform.position.y, app.view.myGameTitleClass[z].titleObj.transform.position.z);
-            }
+			// Get title starting values
+			for (int z = 0; z < app.view.myGameTitleClass.Length; z++)
+			{
+				app.view.myGameTitleClass [z].startingPos = new Vector3 (app.view.myGameTitleClass [z].titleObj.transform.position.x, app.view.myGameTitleClass [z].titleObj.transform.position.y, app.view.myGameTitleClass [z].titleObj.transform.position.z);
+			}
 
-            // Get Foreground One starting values
-            for (int y = 0; y < app.view.myFGOne.Length; y++)
-            {
-            	app.view.myFGOne[y].foregroundOneStartingPos = app.view.myFGOne[y].foregroundOneLeap.transform.position;
-            }
+			// Get Foreground One starting values
+			for (int y = 0; y < app.view.myFGOne.Length; y++)
+			{
+				app.view.myFGOne [y].foregroundOneStartingPos = app.view.myFGOne [y].foregroundOneLeap.transform.position;
+			}
 
 			// Get Foreground Two starting values
-            for (int w = 0; w < app.view.myFGTwo.Length; w++)
-            {
-            	app.view.myFGTwo[w].foregroundTwoStartingPos = app.view.myFGTwo[w].foregroundTwoLeap.transform.position;
-            }
+			for (int w = 0; w < app.view.myFGTwo.Length; w++)
+			{
+				app.view.myFGTwo [w].foregroundTwoStartingPos = app.view.myFGTwo [w].foregroundTwoLeap.transform.position;
+			}
+
+			// Get Background One starting values
+			for (int u = 0; u < app.view.myBGOne.Length; u++)
+			{
+				app.view.myBGOne [u].backgroundOneStartingPos = app.view.myBGOne [u].backgroundOneLeap.transform.position;
+			}
+
+			// Get Background Two starting values
+			for (int v = 0; v < app.view.myBGTwo.Length; v++)
+			{
+				app.view.myBGTwo [v].backgroundTwoStartingPos = app.view.myBGTwo[v].backgroundTwoLeap.transform.position;
+			}
 
             app.view.tapToPlayStartLoop = false;
         }
     }
 
-    private void StartState()
-    {
-        // Start counting
-        if (myUIStates == UIStates.SceneStart)
-        {
-            app.model.playerIdleTime += Time.deltaTime;
+    private void StartState ()
+	{
+		// Start counting
+		if (myUIStates == UIStates.SceneStart)
+		{
+			app.model.playerIdleTime += Time.deltaTime;
 
-            // while idletime is greater than 10 seconds
-            if (app.model.playerIdleTime > 10.0f)
-            {
-                // Player is idle so fade out UI
-                myGameStates = GameStates.PlayerIdle;
-            }
-            else // less than 10 seconds
-            {
-                // Player is not idle maintain UI
-                myGameStates = GameStates.PlayerNotIdle;
-            }
+			// while idletime is greater than 10 seconds
+			if (app.model.playerIdleTime > 10.0f)
+			{
+				// Player is idle so fade out UI
+				myGameStates = GameStates.PlayerIdle;
+			}
+			else // less than 10 seconds
+			{
+				// Player is not idle maintain UI
+				myGameStates = GameStates.PlayerNotIdle;
+			}
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                // Reset Time
-                app.model.playerIdleTime = 0f;
-                myGameStates = GameStates.PlayerNotIdle;
-            }
-        }
-        else if (myUIStates == UIStates.SceneStartPlay)
-        {
-            myGameStates = GameStates.PlayerStartedPlaying;
-            // yield return new WaitForSeconds (0.25f);
-        }
-        else if (myUIStates == UIStates.ScenePlay)
-        {
-            myGameStates = GameStates.PlayerIsPlaying;
-        }
-        else if (myUIStates == UIStates.SceneFail)
-        {
-            myGameStates = GameStates.PlayerFailed;
-        }
-        else if (myUIStates == UIStates.SceneRevive)
-        {
-            myGameStates = GameStates.PlayerRevive;
-        }
-        else if (myUIStates == UIStates.SceneResults)
-        {
-            myGameStates = GameStates.PlayerResults;
-        }
-        else if (myUIStates == UIStates.SceneLoading)
-        {
-            myGameStates = GameStates.PlayerLoading;
-        }
+			if (Input.GetMouseButtonDown (0))
+			{
+				// Reset Time
+				app.model.playerIdleTime = 0f;
+				myGameStates = GameStates.PlayerNotIdle;
+			}
+		}
+		else if (myUIStates == UIStates.SceneStartPlay)
+		{
+			myGameStates = GameStates.PlayerStartedPlaying;
+			// yield return new WaitForSeconds (0.25f);
+		}
+		else if (myUIStates == UIStates.ScenePlay)
+		{
+			myGameStates = GameStates.PlayerIsPlaying;
+		}
+		else if (myUIStates == UIStates.SceneFail)
+		{
+			myGameStates = GameStates.PlayerFailed;
+		}
+		else if (myUIStates == UIStates.SceneRevive)
+		{
+			myGameStates = GameStates.PlayerRevive;
+		}
+		else if (myUIStates == UIStates.SceneResults)
+		{
+			myGameStates = GameStates.PlayerResults;
+		}
+		else if (myUIStates == UIStates.SceneLoading)
+		{
+			myGameStates = GameStates.PlayerLoading;
+		}
+		else if (myUIStates == UIStates.SceneLoadingExit)
+		{
+			myGameStates = GameStates.PlayerLoadingExit;
+		}
     }
 
     #endregion
@@ -1338,15 +1462,15 @@ public class RexJumpController : RexJumpElement
 
 	private void BackgroundOneLeap ()
 	{
-		for (int i = 0; i < app.view.backgroundOneLeap.Length; i++)
+		for (int i = 0; i < app.view.myBGOne.Length; i++)
 		{
 			if (app.model.playerIsMoving == true)
 			{
-				app.view.backgroundOneLeap[i].transform.Translate (Vector3.left * app.pController.mSpeed * app.model.backgroundOneLeapSpeed * Time.deltaTime);
+				app.view.myBGOne[i].backgroundOneLeap.transform.Translate (Vector3.left * app.pController.mSpeed * app.model.backgroundOneLeapSpeed * Time.deltaTime);
 
-				if (app.view.backgroundOneLeap[i].transform.position.x <= app.view.groundPoolerRange.transform.position.x)
+				if (app.view.myBGOne[i].backgroundOneLeap.transform.position.x <= app.view.groundPoolerRange.transform.position.x)
 				{
-					app.view.backgroundOneLeap[i].transform.position = new Vector3 (app.view.platformGenRange.transform.position.x + Random.Range(-3.0f, 3.0f), app.view.backgroundOneLeap[i].transform.position.y, app.view.backgroundOneLeap[i].transform.position.z);
+					app.view.myBGOne[i].backgroundOneLeap.transform.position = new Vector3 (app.view.platformGenRange.transform.position.x + Random.Range(-3.0f, 3.0f), app.view.myBGOne[i].backgroundOneLeap.transform.position.y, app.view.myBGOne[i].backgroundOneLeap.transform.position.z);
 				}
 			}
 		}
@@ -1354,15 +1478,15 @@ public class RexJumpController : RexJumpElement
 
     private void BackgroundTwoLeap()
     {
-        for (int i = 0; i < app.view.backgroundTwoLeap.Length; i++)
+		for (int i = 0; i < app.view.myBGTwo.Length; i++)
         {
             if (app.model.playerIsMoving == true)
             {
-                app.view.backgroundTwoLeap[i].transform.Translate(Vector3.left * app.pController.mSpeed * app.model.backgroundTwoLeapSpeed * Time.deltaTime);
+                app.view.myBGTwo[i].backgroundTwoLeap.transform.Translate(Vector3.left * app.pController.mSpeed * app.model.backgroundTwoLeapSpeed * Time.deltaTime);
 
-                if (app.view.backgroundTwoLeap[i].transform.position.x <= app.view.mountainPoolerRange.transform.position.x)
+				if (app.view.myBGTwo[i].backgroundTwoLeap.transform.position.x <= app.view.mountainPoolerRange.transform.position.x)
                 {
-                    app.view.backgroundTwoLeap[i].transform.position = new Vector3 (app.view.mountainGeneratorPos.transform.position.x, app.view.backgroundTwoLeap[i].transform.position.y, app.view.backgroundTwoLeap[i].transform.position.z);
+					app.view.myBGTwo[i].backgroundTwoLeap.transform.position = new Vector3 (app.view.mountainGeneratorPos.transform.position.x, app.view.myBGTwo[i].backgroundTwoLeap.transform.position.y, app.view.myBGTwo[i].backgroundTwoLeap.transform.position.z);
                 }
             }
         }

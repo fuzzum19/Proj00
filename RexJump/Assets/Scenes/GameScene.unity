@@ -432,7 +432,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 473}
+  m_AnchoredPosition: {x: 1.8496, y: 476}
   m_SizeDelta: {x: 80, y: 692}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &118764630
@@ -3728,6 +3728,7 @@ MonoBehaviour:
   sceneReviveTime: 0
   sceneResultsTime: 0
   sceneLoadingTime: 0
+  sceneExitLoadingTime: 0
   parallaxVect3StartValues: {x: 0, y: 0, z: 0}
   playerIdleTime: 0
   speedIncreaseMilestone: 30
@@ -6437,10 +6438,10 @@ MonoBehaviour:
   myStartScreenClass:
   - start_thisCanvasGroup: {fileID: 2085302342}
     start_thisButton: {fileID: 0}
-    start_text: {fileID: 0}
+    start_text: {fileID: 2085302339}
   - start_thisCanvasGroup: {fileID: 1163024228}
     start_thisButton: {fileID: 0}
-    start_text: {fileID: 0}
+    start_text: {fileID: 1163024226}
   - start_thisCanvasGroup: {fileID: 1035774081}
     start_thisButton: {fileID: 0}
     start_text: {fileID: 0}
@@ -6634,16 +6635,24 @@ MonoBehaviour:
   - foregroundTwoLeap: {fileID: 1025185867}
     foregroundTwoStartingPos: {x: 0, y: 0, z: 0}
   mountainGeneratorPos: {fileID: 860215880}
-  backgroundOneLeap:
-  - {fileID: 1383373014}
-  - {fileID: 1203602579}
-  - {fileID: 2082874159}
-  backgroundTwoLeap:
-  - {fileID: 126198690}
-  - {fileID: 806957677}
-  - {fileID: 1319410069}
-  - {fileID: 1091620476}
-  - {fileID: 392437901}
+  myBGOne:
+  - backgroundOneLeap: {fileID: 1383373014}
+    backgroundOneStartingPos: {x: 0, y: 0, z: 0}
+  - backgroundOneLeap: {fileID: 1203602579}
+    backgroundOneStartingPos: {x: 0, y: 0, z: 0}
+  - backgroundOneLeap: {fileID: 2082874159}
+    backgroundOneStartingPos: {x: 0, y: 0, z: 0}
+  myBGTwo:
+  - backgroundTwoLeap: {fileID: 1091620476}
+    backgroundTwoStartingPos: {x: 0, y: 0, z: 0}
+  - backgroundTwoLeap: {fileID: 126198690}
+    backgroundTwoStartingPos: {x: 0, y: 0, z: 0}
+  - backgroundTwoLeap: {fileID: 1319410069}
+    backgroundTwoStartingPos: {x: 0, y: 0, z: 0}
+  - backgroundTwoLeap: {fileID: 392437901}
+    backgroundTwoStartingPos: {x: 0, y: 0, z: 0}
+  - backgroundTwoLeap: {fileID: 806957677}
+    backgroundTwoStartingPos: {x: 0, y: 0, z: 0}
   coinPooler: {fileID: 724012562}
   hiScoreText: {fileID: 1758817494}
   playerAnimator: {fileID: 1320872021}

@@ -41,6 +41,8 @@ public class RexJumpModel : RexJumpElement
     public float sceneResultsTime = 0f;
     [ReadOnlyAttribute]
     public float sceneLoadingTime = 0f;
+    [ReadOnlyAttribute]
+    public float sceneExitLoadingTime = 0f;
 
     [Space(20)]
     [Header(" --- Starting game values --- ")]
