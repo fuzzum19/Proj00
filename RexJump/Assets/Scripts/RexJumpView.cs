@@ -112,7 +112,7 @@ public class RexJumpView : RexJumpElement
         [ReadOnlyAttribute]
         public Vector2 myReviveLastPos;
 		[ReadOnlyAttribute]
-        public Vector2 myMovedPos;
+        public Vector2 myReviveMovedPos;
         // public Animator revive_thisAnim;
     }
 
@@ -138,6 +138,8 @@ public class RexJumpView : RexJumpElement
         public Text results_thisText;
         [ReadOnlyAttribute]
         public Vector2 myResultsLasPos;
+        [ReadOnlyAttribute]
+        public Vector2 myResultsMovePos;
     }
 
     public ResultsScreen[] myResultsScreenClass;
@@ -187,7 +189,6 @@ public class RexJumpView : RexJumpElement
 	[Space(10)]
 
 	public GameObject endlessScroller;
-
 
 	[System.Serializable]
 	public class ForegroundOneSettings
@@ -258,8 +259,6 @@ public class RexJumpView : RexJumpElement
     // LerpMyBlur()
     public Animator playerAnimator;
     public BlurOptimized myBlur;
-    public bool isBlurEnable { get; set; }
-
 
     // Use this for initialization
 	void Awake ()

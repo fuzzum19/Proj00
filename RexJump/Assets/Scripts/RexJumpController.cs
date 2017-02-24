@@ -66,9 +66,8 @@ public class RexJumpController : RexJumpElement
     {
 //        app.model.resolutionTest.text = Screen.currentResolution + " " + SystemInfo.deviceType + " " + SystemInfo.deviceModel;
         app.model.resolutionTest.text = app.model.widthToLoad + " x " + app.model.heightToLoad + " | " + app.model.aspectRatio + " | " + SystemInfo.deviceModel + " | " + SystemInfo.deviceType;
+
         // ====== StartScreen_UI ===== //
-        // Set starting position of parallax scroller
-        app.model.parallaxVect3StartValues = Vector3.zero;
 
         // Set last player position for the Camera
 		app.model.lastPlayerPos = app.view.player.transform.position;
@@ -95,9 +94,6 @@ public class RexJumpController : RexJumpElement
 		// Get Player Starting Point
 		app.model.platformStartpoint = app.view.platformGeneratorPos.position;
 		app.model.playerStartpoint = app.view.player.transform.position;
-
-        // Set Lerp blur to disable
-        app.view.isBlurEnable = false;
 
 		// Set Revive UI's value to move
 		app.view.reviveUIPercentToMove_X = Screen.width * 0.25f;
@@ -775,17 +771,22 @@ public class RexJumpController : RexJumpElement
                     RegressBarReviveScreen(); 
                 }
 
-                app.view.myReviveScreenClass[4].revive_thisButton.interactable = true;
-                app.view.myReviveScreenClass[4].revive_thisCanvasGroup.interactable = true;
-                app.view.myReviveScreenClass[4].revive_thisCanvasGroup.blocksRaycasts = true;
+				if (app.view.myReviveScreenClass[6].revive_thisCanvasGroup.alpha >= 0.99f)
+				{
+					app.view.myReviveScreenClass[4].revive_thisButton.interactable = true;
+	                app.view.myReviveScreenClass[4].revive_thisCanvasGroup.interactable = true;
+	                app.view.myReviveScreenClass[4].revive_thisCanvasGroup.blocksRaycasts = true;
 
-                app.view.myReviveScreenClass[5].revive_thisButton.interactable = true;
-                app.view.myReviveScreenClass[5].revive_thisCanvasGroup.interactable = true;
-                app.view.myReviveScreenClass[5].revive_thisCanvasGroup.blocksRaycasts = true;
+	                app.view.myReviveScreenClass[5].revive_thisButton.interactable = true;
+	                app.view.myReviveScreenClass[5].revive_thisCanvasGroup.interactable = true;
+	                app.view.myReviveScreenClass[5].revive_thisCanvasGroup.blocksRaycasts = true;
 
-                app.view.myReviveScreenClass[6].revive_thisButton.interactable = true;
-                app.view.myReviveScreenClass[6].revive_thisCanvasGroup.interactable = true;
-                app.view.myReviveScreenClass[6].revive_thisCanvasGroup.blocksRaycasts = true;
+	                app.view.myReviveScreenClass[6].revive_thisButton.interactable = true;
+	                app.view.myReviveScreenClass[6].revive_thisCanvasGroup.interactable = true;
+	                app.view.myReviveScreenClass[6].revive_thisCanvasGroup.blocksRaycasts = true;
+				}
+
+
                 break;
 
             #endregion
@@ -816,6 +817,7 @@ public class RexJumpController : RexJumpElement
                 if (app.model.sceneResultsTime >= 0.40f)
                 {
                     AnimInUI(app.view.myResultsScreenClass[1].results_thisRectTransform, app.view.myResultsScreenClass[1].myResultsLasPos, app.view.myResultsScreenClass[1].results_thisCanvasGroup);
+                    app.view.myResultsScreenClass[3].results_thisText.text = app.model.norScoreString();
                 }
                 if (app.model.sceneResultsTime >= 0.55f)
                 {
@@ -841,7 +843,8 @@ public class RexJumpController : RexJumpElement
                 {
                     AnimInUI(app.view.myResultsScreenClass[11].results_thisRectTransform, app.view.myResultsScreenClass[11].myResultsLasPos, app.view.myResultsScreenClass[11].results_thisCanvasGroup);
                 }
-                if (app.model.sceneResultsTime >= 1.45f)
+
+                if (app.view.myResultsScreenClass[11].results_thisCanvasGroup.alpha >= 0.99f)
                 {
                     app.view.myResultsScreenClass[6].results_thisCanvasGroup.interactable = true;
                     app.view.myResultsScreenClass[6].results_thisCanvasGroup.blocksRaycasts = true;
@@ -929,7 +932,7 @@ public class RexJumpController : RexJumpElement
                         }
                     }
 
-                    // Disable interactalbe in Revive UI
+                    // Disable interactable in Revive UI
                     for (int b = 0; b < app.view.myReviveScreenClass.Length; b++)
                     {
                     	if (app.view.myReviveScreenClass[b].revive_thisCanvasGroup == null)
@@ -985,16 +988,35 @@ public class RexJumpController : RexJumpElement
 	                // Remove Blur
 					LerpMyBlur(false);
 
+					#region Reset Failed UI
+					// Reset Failed UI
+					for (int i = 0; i < app.view.myFailScreenClass.Length; i++)
+		            {
+		                app.view.myFailScreenClass[i].fail_thisCanvasGroup.alpha = 0.0f;
+		                app.view.myFailScreenClass[i].fail_thisCanvasGroup.interactable = false;
+		                app.view.myFailScreenClass[i].fail_thisCanvasGroup.blocksRaycasts = false;
+		            }
+		            #endregion
+
 					#region Reset Revive UI
 					// Reset Revive UI to original position
 					for (int a = 0; a < app.view.myReviveScreenClass.Length; a++)
 	            	{
-						app.view.myReviveScreenClass[a].revive_thisRectTransform.anchoredPosition = app.view.myReviveScreenClass[a].myMovedPos;
+						app.view.myReviveScreenClass[a].revive_thisRectTransform.anchoredPosition = app.view.myReviveScreenClass[a].myReviveMovedPos;
 	            	}
 
 	            	// Reset revive bar
 	            	app.view.regressBar.fillAmount = 1.0f;
 					app.view.barTime = app.view.barTimeAmount;
+	                #endregion
+
+	                #region Reset Results UI
+	                // Reset Results UI to orig pos
+	                for (int j = 0; j < app.view.myResultsScreenClass.Length; j++)
+	                {
+	                	app.view.myResultsScreenClass[j].results_thisRectTransform.anchoredPosition = app.view.myResultsScreenClass[j].myResultsMovePos;
+	                }
+
 	                #endregion
 
 	                #region Reset Environment
@@ -1038,11 +1060,14 @@ public class RexJumpController : RexJumpElement
 					}
 					#endregion
 
-					for (int a = 0; a < app.view.myStartScreenClass.Length; a++)
+					// Reset Score
+					app.model.scoreCount = 0f;
+
+					for (int h = 0; h < app.view.myStartScreenClass.Length; h++)
 	            	{
-	            		app.view.myStartScreenClass[a].start_thisCanvasGroup.alpha = 0f;
-						app.view.myStartScreenClass[a].start_thisCanvasGroup.interactable = false;
-	                    app.view.myStartScreenClass[a].start_thisCanvasGroup.blocksRaycasts = false;
+	            		app.view.myStartScreenClass[h].start_thisCanvasGroup.alpha = 0f;
+						app.view.myStartScreenClass[h].start_thisCanvasGroup.interactable = false;
+	                    app.view.myStartScreenClass[h].start_thisCanvasGroup.blocksRaycasts = false;
 	            	}
 
 					if (app.model.sceneExitLoadingTime >= 0.75f)
@@ -1115,6 +1140,65 @@ public class RexJumpController : RexJumpElement
     }
 
     //========================================================================//
+
+	private void StartState ()
+	{
+		// Start counting
+		if (myUIStates == UIStates.SceneStart)
+		{
+			app.model.playerIdleTime += Time.deltaTime;
+
+			// while idletime is greater than 10 seconds
+			if (app.model.playerIdleTime > 10.0f)
+			{
+				// Player is idle so fade out UI
+				myGameStates = GameStates.PlayerIdle;
+			}
+			else // less than 10 seconds
+			{
+				// Player is not idle maintain UI
+				myGameStates = GameStates.PlayerNotIdle;
+			}
+
+			if (Input.GetMouseButtonDown (0))
+			{
+				// Reset Time
+				app.model.playerIdleTime = 0f;
+				myGameStates = GameStates.PlayerNotIdle;
+			}
+		}
+		else if (myUIStates == UIStates.SceneStartPlay)
+		{
+			myGameStates = GameStates.PlayerStartedPlaying;
+			// yield return new WaitForSeconds (0.25f);
+		}
+		else if (myUIStates == UIStates.ScenePlay)
+		{
+			myGameStates = GameStates.PlayerIsPlaying;
+		}
+		else if (myUIStates == UIStates.SceneFail)
+		{
+			myGameStates = GameStates.PlayerFailed;
+		}
+		else if (myUIStates == UIStates.SceneRevive)
+		{
+			myGameStates = GameStates.PlayerRevive;
+		}
+		else if (myUIStates == UIStates.SceneResults)
+		{
+			myGameStates = GameStates.PlayerResults;
+		}
+		else if (myUIStates == UIStates.SceneLoading)
+		{
+			myGameStates = GameStates.PlayerLoading;
+		}
+		else if (myUIStates == UIStates.SceneLoadingExit)
+		{
+			myGameStates = GameStates.PlayerLoadingExit;
+		}
+    }
+
+	//========================================================================//
 
     #region StartScreen_UI
 
@@ -1201,7 +1285,7 @@ public class RexJumpController : RexJumpElement
 			app.view.gameModeMoveLeft = new Vector2 (0 - Screen.width / 2.0f, app.view.myGameModesText [0].modeRectTransform.anchoredPosition.y);
 			app.view.gameModeMoveRight = new Vector2 (0 + Screen.width / 2.0f, app.view.myGameModesText [0].modeRectTransform.anchoredPosition.y);   
 
-			// Change Strings
+			// Change Strings of Modes
 			app.view.myGameModesText [0].modeText.text = app.model.GameModeClassicString ();
 			app.view.myGameModesText [1].modeText.text = app.model.GameModeZenString ();
 
@@ -1239,63 +1323,6 @@ public class RexJumpController : RexJumpElement
         }
     }
 
-    private void StartState ()
-	{
-		// Start counting
-		if (myUIStates == UIStates.SceneStart)
-		{
-			app.model.playerIdleTime += Time.deltaTime;
-
-			// while idletime is greater than 10 seconds
-			if (app.model.playerIdleTime > 10.0f)
-			{
-				// Player is idle so fade out UI
-				myGameStates = GameStates.PlayerIdle;
-			}
-			else // less than 10 seconds
-			{
-				// Player is not idle maintain UI
-				myGameStates = GameStates.PlayerNotIdle;
-			}
-
-			if (Input.GetMouseButtonDown (0))
-			{
-				// Reset Time
-				app.model.playerIdleTime = 0f;
-				myGameStates = GameStates.PlayerNotIdle;
-			}
-		}
-		else if (myUIStates == UIStates.SceneStartPlay)
-		{
-			myGameStates = GameStates.PlayerStartedPlaying;
-			// yield return new WaitForSeconds (0.25f);
-		}
-		else if (myUIStates == UIStates.ScenePlay)
-		{
-			myGameStates = GameStates.PlayerIsPlaying;
-		}
-		else if (myUIStates == UIStates.SceneFail)
-		{
-			myGameStates = GameStates.PlayerFailed;
-		}
-		else if (myUIStates == UIStates.SceneRevive)
-		{
-			myGameStates = GameStates.PlayerRevive;
-		}
-		else if (myUIStates == UIStates.SceneResults)
-		{
-			myGameStates = GameStates.PlayerResults;
-		}
-		else if (myUIStates == UIStates.SceneLoading)
-		{
-			myGameStates = GameStates.PlayerLoading;
-		}
-		else if (myUIStates == UIStates.SceneLoadingExit)
-		{
-			myGameStates = GameStates.PlayerLoadingExit;
-		}
-    }
-
     #endregion
 
     //========================================================================//
@@ -1327,8 +1354,10 @@ public class RexJumpController : RexJumpElement
 
     private void ReviveScreenUIAlphaZero ()
 	{
-		if (app.view.reviveScreenStartLoop) {
-			for (int i = 0; i < app.view.myReviveScreenClass.Length; i++) {
+		if (app.view.reviveScreenStartLoop) 
+		{
+			for (int i = 0; i < app.view.myReviveScreenClass.Length; i++) 
+			{
 				app.view.myReviveScreenClass [i].revive_thisCanvasGroup.alpha = 0.0f;
 				app.view.myReviveScreenClass [i].revive_thisCanvasGroup.interactable = false;
 				app.view.myReviveScreenClass [i].revive_thisCanvasGroup.blocksRaycasts = false;
@@ -1344,9 +1373,10 @@ public class RexJumpController : RexJumpElement
 			app.view.myReviveScreenClass [5].revive_thisRectTransform.anchoredPosition = new Vector2 (app.view.myReviveScreenClass [5].revive_thisRectTransform.anchoredPosition.x - app.view.reviveUIPercentToMove_X, app.view.myReviveScreenClass [5].revive_thisRectTransform.anchoredPosition.y);
 			app.view.myReviveScreenClass [6].revive_thisRectTransform.anchoredPosition = new Vector2 (app.view.myReviveScreenClass [6].revive_thisRectTransform.anchoredPosition.x + app.view.reviveUIPercentToMove_X, app.view.myReviveScreenClass [6].revive_thisRectTransform.anchoredPosition.y);
 
+			// Get 2nd position
 			for (int x = 0; x < app.view.myReviveScreenClass.Length; x++) 
 			{
-				app.view.myReviveScreenClass[x].myMovedPos = app.view.myReviveScreenClass[x].revive_thisRectTransform.anchoredPosition;
+				app.view.myReviveScreenClass[x].myReviveMovedPos = app.view.myReviveScreenClass[x].revive_thisRectTransform.anchoredPosition;
 			}
 
             app.view.myReviveScreenClass[4].revive_thisButton.interactable = false;
@@ -1374,37 +1404,42 @@ public class RexJumpController : RexJumpElement
 
     #region ResultsScreen_Method
 
-    private void ResultsScreenUIAlphaZero()
-    {
-        if (app.view.resultScreenStartLoop)
-        {
-            for (int i = 0; i < app.view.myResultsScreenClass.Length; i++)
-            {
-                // Canvas Group
-                if (app.view.myResultsScreenClass[i].results_thisCanvasGroup == null)
-                {
-                    continue;
-                }
-                else
-                {
-                    app.view.myResultsScreenClass[i].results_thisCanvasGroup.alpha = 0f;
-                    app.view.myResultsScreenClass[i].results_thisCanvasGroup.interactable = false;
-                    app.view.myResultsScreenClass[i].results_thisCanvasGroup.blocksRaycasts = false;
-                }
+    private void ResultsScreenUIAlphaZero ()
+	{
+		if (app.view.resultScreenStartLoop)
+		{
+			for (int i = 0; i < app.view.myResultsScreenClass.Length; i++)
+			{
+				// Canvas Group
+				if (app.view.myResultsScreenClass [i].results_thisCanvasGroup == null)
+				{
+					continue;
+				}
+				else
+				{
+					app.view.myResultsScreenClass [i].results_thisCanvasGroup.alpha = 0f;
+					app.view.myResultsScreenClass [i].results_thisCanvasGroup.interactable = false;
+					app.view.myResultsScreenClass [i].results_thisCanvasGroup.blocksRaycasts = false;
+				}
 
-                // Rect Transform
-                app.view.myResultsScreenClass[i].myResultsLasPos = app.view.myResultsScreenClass[i].results_thisRectTransform.anchoredPosition;
-            }
+				// Rect Transform
+				app.view.myResultsScreenClass [i].myResultsLasPos = app.view.myResultsScreenClass [i].results_thisRectTransform.anchoredPosition;
+			}
 
-            app.view.myResultsScreenClass[1].results_thisRectTransform.anchoredPosition = new Vector2 ( app.view.myResultsScreenClass[1].results_thisRectTransform.anchoredPosition.x + app.view.resultsUIPercentToMove_X, app.view.myResultsScreenClass[1].results_thisRectTransform.anchoredPosition.y);
-            app.view.myResultsScreenClass[4].results_thisRectTransform.anchoredPosition = new Vector2 ( app.view.myResultsScreenClass[4].results_thisRectTransform.anchoredPosition.x - app.view.resultsUIPercentToMove_X, app.view.myResultsScreenClass[4].results_thisRectTransform.anchoredPosition.y);
-            app.view.myResultsScreenClass[6].results_thisRectTransform.anchoredPosition = new Vector2 ( app.view.myResultsScreenClass[6].results_thisRectTransform.anchoredPosition.x - app.view.resultsUIPercentToMove_X, app.view.myResultsScreenClass[6].results_thisRectTransform.anchoredPosition.y);
-            app.view.myResultsScreenClass[7].results_thisRectTransform.anchoredPosition = new Vector2 ( app.view.myResultsScreenClass[7].results_thisRectTransform.anchoredPosition.x + app.view.resultsUIPercentToMove_X, app.view.myResultsScreenClass[7].results_thisRectTransform.anchoredPosition.y);
-            app.view.myResultsScreenClass[8].results_thisRectTransform.anchoredPosition = new Vector2 ( app.view.myResultsScreenClass[8].results_thisRectTransform.anchoredPosition.x - app.view.resultsUIPercentToMove_X, app.view.myResultsScreenClass[8].results_thisRectTransform.anchoredPosition.y);
+			app.view.myResultsScreenClass [1].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass [1].results_thisRectTransform.anchoredPosition.x + app.view.resultsUIPercentToMove_X, app.view.myResultsScreenClass [1].results_thisRectTransform.anchoredPosition.y);
+			app.view.myResultsScreenClass [4].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass [4].results_thisRectTransform.anchoredPosition.x - app.view.resultsUIPercentToMove_X, app.view.myResultsScreenClass [4].results_thisRectTransform.anchoredPosition.y);
+			app.view.myResultsScreenClass [6].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass [6].results_thisRectTransform.anchoredPosition.x - app.view.resultsUIPercentToMove_X, app.view.myResultsScreenClass [6].results_thisRectTransform.anchoredPosition.y);
+			app.view.myResultsScreenClass [7].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass [7].results_thisRectTransform.anchoredPosition.x + app.view.resultsUIPercentToMove_X, app.view.myResultsScreenClass [7].results_thisRectTransform.anchoredPosition.y);
+			app.view.myResultsScreenClass [8].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass [8].results_thisRectTransform.anchoredPosition.x - app.view.resultsUIPercentToMove_X, app.view.myResultsScreenClass [8].results_thisRectTransform.anchoredPosition.y);
 
-            app.view.myResultsScreenClass[9].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass[9].results_thisRectTransform.anchoredPosition.x, app.view.myResultsScreenClass[9].results_thisRectTransform.anchoredPosition.y - app.view.resultsUIPercentToMove_Y);
-            app.view.myResultsScreenClass[10].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass[10].results_thisRectTransform.anchoredPosition.x, app.view.myResultsScreenClass[10].results_thisRectTransform.anchoredPosition.y - app.view.resultsUIPercentToMove_Y);
-            app.view.myResultsScreenClass[11].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass[11].results_thisRectTransform.anchoredPosition.x, app.view.myResultsScreenClass[11].results_thisRectTransform.anchoredPosition.y - app.view.resultsUIPercentToMove_Y);
+			app.view.myResultsScreenClass [9].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass [9].results_thisRectTransform.anchoredPosition.x, app.view.myResultsScreenClass [9].results_thisRectTransform.anchoredPosition.y - app.view.resultsUIPercentToMove_Y);
+			app.view.myResultsScreenClass [10].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass [10].results_thisRectTransform.anchoredPosition.x, app.view.myResultsScreenClass [10].results_thisRectTransform.anchoredPosition.y - app.view.resultsUIPercentToMove_Y);
+			app.view.myResultsScreenClass [11].results_thisRectTransform.anchoredPosition = new Vector2 (app.view.myResultsScreenClass [11].results_thisRectTransform.anchoredPosition.x, app.view.myResultsScreenClass [11].results_thisRectTransform.anchoredPosition.y - app.view.resultsUIPercentToMove_Y);
+
+			for (int a = 0; a < app.view.myResultsScreenClass.Length; a++)
+			{
+				app.view.myResultsScreenClass[a].myResultsMovePos = app.view.myResultsScreenClass[a].results_thisRectTransform.anchoredPosition;
+			}
 
             app.view.resultScreenStartLoop = false;
         }

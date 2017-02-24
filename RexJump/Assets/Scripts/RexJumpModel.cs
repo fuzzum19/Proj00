@@ -45,10 +45,6 @@ public class RexJumpModel : RexJumpElement
     public float sceneExitLoadingTime = 0f;
 
     [Space(20)]
-    [Header(" --- Starting game values --- ")]
-    public Vector3 parallaxVect3StartValues;
-
-    [Space(20)]
     [Header(" --- Game Idle --- ")]
     [ReadOnlyAttribute]
     public float playerIdleTime;
@@ -164,8 +160,8 @@ public class RexJumpModel : RexJumpElement
     }
 
     // ====================================================================== //
-    // Start screen UI
 
+    // String for Modes
     public string GameModeClassicString()
     {
         my_strBuilder.Length = 0;
@@ -181,8 +177,8 @@ public class RexJumpModel : RexJumpElement
     }
 
     // ====================================================================== //
-    // Revive screen UI
 
+    // Revive screen UI
     public string WatchAVideo()
     {
         my_strBuilder.Length = 0;

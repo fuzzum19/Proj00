@@ -58,7 +58,3 @@ E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.Analytics.xml
 E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.HoloLens.xml
 E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.VR.xml
 E:\Mark\Apps\Proj00\RexJump\obj\Debug\Assembly-CSharp.pdb
-E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.Advertisements.dll
-E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.Purchasing.dll
-E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.Advertisements.xml
-E:\Mark\Apps\Proj00\RexJump\Temp\bin\Debug\UnityEngine.Purchasing.xml

@@ -3729,7 +3729,6 @@ MonoBehaviour:
   sceneResultsTime: 0
   sceneLoadingTime: 0
   sceneExitLoadingTime: 0
-  parallaxVect3StartValues: {x: 0, y: 0, z: 0}
   playerIdleTime: 0
   speedIncreaseMilestone: 30
   speedIncreaseMilestoneStore: 0
@@ -6502,43 +6501,43 @@ MonoBehaviour:
     revive_thisButton: {fileID: 0}
     revive_thisText: {fileID: 0}
     myReviveLastPos: {x: 0, y: 0}
-    myMovedPos: {x: 0, y: 0}
+    myReviveMovedPos: {x: 0, y: 0}
   - revive_thisRectTransform: {fileID: 1230256216}
     revive_thisCanvasGroup: {fileID: 1230256220}
     revive_thisButton: {fileID: 0}
     revive_thisText: {fileID: 0}
     myReviveLastPos: {x: 0, y: 0}
-    myMovedPos: {x: 0, y: 0}
+    myReviveMovedPos: {x: 0, y: 0}
   - revive_thisRectTransform: {fileID: 646138246}
     revive_thisCanvasGroup: {fileID: 646138249}
     revive_thisButton: {fileID: 0}
     revive_thisText: {fileID: 0}
     myReviveLastPos: {x: 0, y: 0}
-    myMovedPos: {x: 0, y: 0}
+    myReviveMovedPos: {x: 0, y: 0}
   - revive_thisRectTransform: {fileID: 879883313}
     revive_thisCanvasGroup: {fileID: 879883316}
     revive_thisButton: {fileID: 0}
     revive_thisText: {fileID: 0}
     myReviveLastPos: {x: 0, y: 0}
-    myMovedPos: {x: 0, y: 0}
+    myReviveMovedPos: {x: 0, y: 0}
   - revive_thisRectTransform: {fileID: 1395424127}
     revive_thisCanvasGroup: {fileID: 1395424131}
     revive_thisButton: {fileID: 1395424128}
     revive_thisText: {fileID: 1183253997}
     myReviveLastPos: {x: 0, y: 0}
-    myMovedPos: {x: 0, y: 0}
+    myReviveMovedPos: {x: 0, y: 0}
   - revive_thisRectTransform: {fileID: 1277848017}
     revive_thisCanvasGroup: {fileID: 1277848021}
     revive_thisButton: {fileID: 1277848018}
     revive_thisText: {fileID: 190633533}
     myReviveLastPos: {x: 0, y: 0}
-    myMovedPos: {x: 0, y: 0}
+    myReviveMovedPos: {x: 0, y: 0}
   - revive_thisRectTransform: {fileID: 1942075589}
     revive_thisCanvasGroup: {fileID: 1942075593}
     revive_thisButton: {fileID: 1942075590}
     revive_thisText: {fileID: 0}
     myReviveLastPos: {x: 0, y: 0}
-    myMovedPos: {x: 0, y: 0}
+    myReviveMovedPos: {x: 0, y: 0}
   resultScreenStartLoop: 1
   resultsUIPercentToMove_X: 0
   resultsUIPercentToMove_Y: 0
@@ -6548,61 +6547,73 @@ MonoBehaviour:
     results_thisButton: {fileID: 0}
     results_thisText: {fileID: 1758817494}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 1069459520}
     results_thisCanvasGroup: {fileID: 1069459521}
     results_thisButton: {fileID: 0}
     results_thisText: {fileID: 0}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 229025432}
     results_thisCanvasGroup: {fileID: 0}
     results_thisButton: {fileID: 0}
     results_thisText: {fileID: 229025433}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 574556228}
     results_thisCanvasGroup: {fileID: 0}
     results_thisButton: {fileID: 0}
     results_thisText: {fileID: 574556229}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 118764629}
     results_thisCanvasGroup: {fileID: 118764630}
     results_thisButton: {fileID: 0}
     results_thisText: {fileID: 0}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 1861779283}
     results_thisCanvasGroup: {fileID: 0}
     results_thisButton: {fileID: 0}
     results_thisText: {fileID: 1861779284}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 132855115}
     results_thisCanvasGroup: {fileID: 132855117}
     results_thisButton: {fileID: 132855118}
     results_thisText: {fileID: 0}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 1697668659}
     results_thisCanvasGroup: {fileID: 1697668661}
     results_thisButton: {fileID: 1697668662}
     results_thisText: {fileID: 0}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 346716522}
     results_thisCanvasGroup: {fileID: 346716524}
     results_thisButton: {fileID: 346716525}
     results_thisText: {fileID: 0}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 1898525231}
     results_thisCanvasGroup: {fileID: 1898525233}
     results_thisButton: {fileID: 1898525234}
     results_thisText: {fileID: 0}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 2071522580}
     results_thisCanvasGroup: {fileID: 2071522582}
     results_thisButton: {fileID: 2071522583}
     results_thisText: {fileID: 0}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   - results_thisRectTransform: {fileID: 1444248723}
     results_thisCanvasGroup: {fileID: 1444248725}
     results_thisButton: {fileID: 1444248726}
     results_thisText: {fileID: 0}
     myResultsLasPos: {x: 0, y: 0}
+    myResultsMovePos: {x: 0, y: 0}
   loaderOne: {fileID: 1293629637}
   loaderTwo: {fileID: 44506303}
   loaderThree: {fileID: 952045131}
@@ -7007,17 +7018,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 263233694}
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 0
       - m_Target: {fileID: 976369713}
         m_MethodName: set_myUIStateSelector
         m_Mode: 3
@@ -7029,17 +7029,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1479988076}
-        m_MethodName: set_isBlurEnable
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 0
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1580241267
