@@ -810,6 +810,16 @@ public class RexJumpController : RexJumpElement
 
                 FadeMyUI(app.view.myResultsScreenClass[0].results_thisCanvasGroup, 0.25f, true);
 
+                // Show current mode in Results Screen
+                if (myGameModes == GameModes.Classic)
+                {
+					app.view.myResultsScreenClass[4].results_thisText.text = app.model.GameModeClassicString();
+                }
+                else if (myGameModes == GameModes.Zen)
+                {
+                	app.view.myResultsScreenClass[4].results_thisText.text = app.model.GameModeZenString();
+                }
+
                 if (app.model.sceneResultsTime >= 0.25f)
                 {
                     AnimInUI(app.view.myResultsScreenClass[4].results_thisRectTransform, app.view.myResultsScreenClass[4].myResultsLasPos, app.view.myResultsScreenClass[4].results_thisCanvasGroup);
