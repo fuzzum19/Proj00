@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4589952848396460}
   - component: {fileID: 212783505212634440}
   - component: {fileID: 114967488225655900}
+  - component: {fileID: 60656215654297880}
   m_Layer: 8
   m_Name: Hill01-M
   m_TagString: Untagged
@@ -35,12 +36,29 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1922625734443138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 29.24459, y: -10.828519, z: 0}
   m_LocalScale: {x: 0.8107788, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &60656215654297880
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922625734443138}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+    m_Paths:
+    - - {x: -0.0510302, y: 0.2629382}
+      - {x: -2.46296, y: 0.0017585754}
+      - {x: 2.17466, y: 0.01108551}
 --- !u!114 &114967488225655900
 MonoBehaviour:
   m_ObjectHideFlags: 1

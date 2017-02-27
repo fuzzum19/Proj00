@@ -9,7 +9,7 @@ public class RexJumpView : RexJumpElement
     public GameObject player;
 	public Camera mainCamera;
     public GameObject startingPlatform;
-	public GameObject ourPlatform;
+	public GameObject emptyPlatform;
 	public GameObject groundPoolerRange;
     public GameObject mountainPoolerRange;
     public GameObject coinPoolerRange;
@@ -169,12 +169,23 @@ public class RexJumpView : RexJumpElement
 	[Space(20)]
 	[Header(" --- Environment Pooling View --- ")]
 	[Space(10)]
-    [Range(0f, 1.0f)]
-    public float level_1_cactus_00_difficulty;
-    [Range(0f, 1.0f)]
-    public float level_1_cactus_01_difficulty;
-	public ObjectPooler[] thePlatformPools;
-    public ObjectPooler[] myRightCactusList;
+	private float myNull000;
+
+	public int[] mySpawnChance;
+
+	[System.Serializable]
+    public struct PlatformPoolingView
+	{
+		public bool hasCoin;
+		[Range(0, 100)]
+		public int platformProbability;
+		public ObjectPooler myPlatformCactus;
+	}
+	public PlatformPoolingView[] myPlatformPoolingView;
+	[ReadOnlyAttribute]
+	public int weightTotal;
+	[ReadOnlyAttribute]
+	public int finalSpawn;
 
     #region EndPool
     [Space(20)]

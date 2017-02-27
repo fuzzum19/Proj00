@@ -84,8 +84,8 @@ public class RexJumpController : RexJumpElement
 		app.model.maxCameraClampY = 5f;
 
 		// Get platform width and height via BoxCollider 2D
-		app.model.platformWidth = app.view.ourPlatform.GetComponent<BoxCollider2D> ().size.x;
-		app.model.platformHeight = app.view.ourPlatform.GetComponent<BoxCollider2D> ().size.y;
+		app.model.platformWidth = app.view.emptyPlatform.GetComponent<BoxCollider2D> ().size.x;
+		app.model.platformHeight = app.view.emptyPlatform.GetComponent<BoxCollider2D> ().size.y;
 
 		// Set min and max height for randomized height platforms
 		app.model.minHeightRange = app.view.platformGeneratorPos.transform.position.y;
@@ -329,6 +329,23 @@ public class RexJumpController : RexJumpElement
             app.view.myBlur.enabled = false;
         }
     }
+
+    // Random weight method
+    public int RandomWeighted ()
+	{
+		int result = 0;
+		int total = 0;
+		int randomValue = Random.Range (0, app.view.weightTotal);
+
+		for (result = 0; result < app.view.myPlatformPoolingView.Length; result++)
+		{
+			total += app.view.myPlatformPoolingView[result].platformProbability;
+
+			if (total > randomValue ) break;
+		}
+
+		return result;
+	}
 
     //========================================================================//
 
@@ -1326,7 +1343,13 @@ public class RexJumpController : RexJumpElement
 			// Get Background Two starting values
 			for (int v = 0; v < app.view.myBGTwo.Length; v++)
 			{
-				app.view.myBGTwo [v].backgroundTwoStartingPos = app.view.myBGTwo[v].backgroundTwoLeap.transform.position;
+				app.view.myBGTwo [v].backgroundTwoStartingPos = app.view.myBGTwo [v].backgroundTwoLeap.transform.position;
+			}
+
+			// Set weight spawn of Platforms
+			for (int t = 0; t < app.view.myPlatformPoolingView.Length; t++)
+			{
+				app.view.weightTotal = app.view.myPlatformPoolingView[t].platformProbability;
 			}
 
             app.view.tapToPlayStartLoop = false;
@@ -1588,38 +1611,66 @@ public class RexJumpController : RexJumpElement
 
 	}
 
-	public void PlatformGeneration()
-    {
-        if (app.view.platformGeneratorPos.transform.position.x < app.view.platformGenRange.position.x) // If generator pos nears generator range
-        {
-            app.model.thePlatformPoolsSelector = Random.Range(0, app.view.thePlatformPools.Length); // Platform Pool Selector
-            app.model.heightChange = app.view.platformGeneratorPos.transform.position.y + Random.Range(app.model.maxHeightChange, -app.model.maxHeightChange); // Change height randomly between value of maxHeightChange and -maxHeightChange
+	public void PlatformGeneration ()
+	{
+		if (app.view.platformGeneratorPos.transform.position.x < app.view.platformGenRange.position.x) // If generator pos nears generator range
+		{
+//            app.model.thePlatformPoolsSelector = Random.Range(0, app.view.myEmptyPlatform.Length); // Platform Pool Selector
+			app.model.heightChange = app.view.platformGeneratorPos.transform.position.y + Random.Range (app.model.maxHeightChange, -app.model.maxHeightChange); // Change height randomly between value of maxHeightChange and -maxHeightChange
 
-            // app.view.newCactiOne = app.view.theCactiPoolsRight[app.model.cactiSelector].GetPooledObject();
-            app.view.platformGeneratorPos.transform.position = new Vector3(app.view.platformGeneratorPos.transform.position.x + app.model.platformWidth + app.model.distanceBetweenPlatforms, app.model.heightChange, 0);
+			// app.view.newCactiOne = app.view.theCactiPoolsRight[app.model.cactiSelector].GetPooledObject();
+			app.view.platformGeneratorPos.transform.position = new Vector3 (app.view.platformGeneratorPos.transform.position.x + app.model.platformWidth + app.model.distanceBetweenPlatforms, app.model.heightChange, 0);
 
-            switch (app.model.levelDifficulty)
-            {
-                case 0: // Level 0
+			switch (app.model.levelDifficulty)
+			{
+				case 0: // Level 0
                     // app.view.newCactusRight = app.view.myRightCactusList[0].cactus.GetPooledObject();
                     // app.view.cactusRightSpriteRenderer = app.view.newCactusRight.GetComponent<SpriteRenderer>();
-                    app.view.newPlatform = app.view.myRightCactusList[0].GetPooledObject();
-                break;
+					app.view.newPlatform = app.view.myPlatformPoolingView [0].myPlatformCactus.GetPooledObject ();
+					break;
 
-                case 1: // Level 1
-                    if (Random.Range(0f, 1f) <= app.view.level_1_cactus_00_difficulty)
-                    {
-                        app.view.newPlatform = app.view.myRightCactusList[0].GetPooledObject();
-                    }
-                    else if (Random.Range(0f, 1f) <= app.view.level_1_cactus_01_difficulty)
-                    {
-                        app.view.newPlatform = app.view.myRightCactusList[1].GetPooledObject();
-                    }
+				case 1: // Level 1
+
+					for (int a = 0; a < app.view.myPlatformPoolingView.Length; a++)
+					{
+						if (app.view.finalSpawn == app.view.myPlatformPoolingView[a])
+						{
+							Debug.Log(app.view.myPlatformPoolingView[a].myPlatformCactus);
+						}
+					}
+
+
+					if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [1].platformProbability)
+					{
+						app.view.newPlatform = app.view.myPlatformPoolingView [1].myPlatformCactus.GetPooledObject ();
+					}
+					else if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [2].platformProbability)
+					{
+						app.view.newPlatform = app.view.myPlatformPoolingView [2].myPlatformCactus.GetPooledObject ();
+					}
+					else if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [3].platformProbability)
+					{
+						app.view.newPlatform = app.view.myPlatformPoolingView [3].myPlatformCactus.GetPooledObject ();
+					}
+					else if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [4].platformProbability)
+					{
+						app.view.newPlatform = app.view.myPlatformPoolingView [4].myPlatformCactus.GetPooledObject ();
+					}
+					else if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [5].platformProbability)
+					{
+						app.view.newPlatform = app.view.myPlatformPoolingView [5].myPlatformCactus.GetPooledObject ();
+					}
+					else if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [6].platformProbability)
+					{
+						app.view.newPlatform = app.view.myPlatformPoolingView [6].myPlatformCactus.GetPooledObject ();
+					}
                     else
                     {
-                        app.view.newPlatform = app.view.myRightCactusList[0].GetPooledObject();
+						app.view.newPlatform = app.view.myPlatformPoolingView[2].myPlatformCactus.GetPooledObject();
                     }
+
                 break;
+
             }
 
             /*
@@ -1672,10 +1723,10 @@ public class RexJumpController : RexJumpElement
             #region Old Pool
                 // Platform One
 
-                GameObject newPlatform = app.view.thePlatformPools[0].GetPooledObject();
-                newPlatform.transform.position = app.view.platformGeneratorPos.transform.position;
-                newPlatform.transform.rotation = app.view.platformGeneratorPos.transform.rotation;
-				newPlatform.SetActive(true);
+//                GameObject newPlatform = app.view.myEmptyPlatform[0].GetPooledObject();
+//                newPlatform.transform.position = app.view.platformGeneratorPos.transform.position;
+//                newPlatform.transform.rotation = app.view.platformGeneratorPos.transform.rotation;
+//				newPlatform.SetActive(true);
 
 
                 app.view.newPlatform.transform.position = new Vector3(app.view.platformGeneratorPos.transform.position.x, app.view.platformGeneratorPos.transform.position.y, app.view.platformGeneratorPos.transform.position.z);
