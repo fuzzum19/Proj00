@@ -6591,23 +6591,25 @@ MonoBehaviour:
     platformProbability: 0
     myPlatformCactus: {fileID: 921240100}
   - hasCoin: 0
-    platformProbability: 0.605
+    platformProbability: 60
     myPlatformCactus: {fileID: 1921856999}
   - hasCoin: 1
-    platformProbability: 0.505
+    platformProbability: 40
     myPlatformCactus: {fileID: 1940582906}
   - hasCoin: 0
-    platformProbability: 0.619
+    platformProbability: 60
     myPlatformCactus: {fileID: 448133429}
   - hasCoin: 1
-    platformProbability: 0.51
+    platformProbability: 40
     myPlatformCactus: {fileID: 1907859159}
   - hasCoin: 0
-    platformProbability: 0.629
+    platformProbability: 60
     myPlatformCactus: {fileID: 1965221786}
   - hasCoin: 1
-    platformProbability: 0.524
+    platformProbability: 0
     myPlatformCactus: {fileID: 1974071104}
+  weightTotal: 0
+  finalSpawn: 0
   endPools:
   - {fileID: 1683208233460202, guid: b5c19a54b5f8b4653b8142d5b68b5aee, type: 2}
   endlessScroller: {fileID: 936068817}

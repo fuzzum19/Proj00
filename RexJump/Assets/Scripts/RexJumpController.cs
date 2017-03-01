@@ -62,14 +62,14 @@ public class RexJumpController : RexJumpElement
 
     //========================================================================//
 
-	void Start()
-    {
+	void Start ()
+	{
 //        app.model.resolutionTest.text = Screen.currentResolution + " " + SystemInfo.deviceType + " " + SystemInfo.deviceModel;
-        app.model.resolutionTest.text = app.model.widthToLoad + " x " + app.model.heightToLoad + " | " + app.model.aspectRatio + " | " + SystemInfo.deviceModel + " | " + SystemInfo.deviceType;
+		app.model.resolutionTest.text = app.model.widthToLoad + " x " + app.model.heightToLoad + " | " + app.model.aspectRatio + " | " + SystemInfo.deviceModel + " | " + SystemInfo.deviceType;
 
-        // ====== StartScreen_UI ===== //
+		// ====== StartScreen_UI ===== //
 
-        // Set last player position for the Camera
+		// Set last player position for the Camera
 		app.model.lastPlayerPos = app.view.player.transform.position;
 
 		// Set scoreIncreasing to Off
@@ -102,6 +102,7 @@ public class RexJumpController : RexJumpElement
 		// Set Results UI's value to move
 		app.view.resultsUIPercentToMove_X = Screen.width * 0.25f;
 		app.view.resultsUIPercentToMove_Y = Screen.height / 10f;
+
 
 		// MyDebugList();
         
@@ -1347,9 +1348,11 @@ public class RexJumpController : RexJumpElement
 			}
 
 			// Set weight spawn of Platforms
+			app.view.weightTotal = 0;
+
 			for (int t = 0; t < app.view.myPlatformPoolingView.Length; t++)
 			{
-				app.view.weightTotal = app.view.myPlatformPoolingView[t].platformProbability;
+				app.view.weightTotal += app.view.myPlatformPoolingView[t].platformProbability;
 			}
 
             app.view.tapToPlayStartLoop = false;
@@ -1631,12 +1634,11 @@ public class RexJumpController : RexJumpElement
 
 				case 1: // Level 1
 
-					for (int a = 0; a < app.view.myPlatformPoolingView.Length; a++)
+					app.view.finalSpawn = RandomWeighted();
+
+					if (app.view.finalSpawn == 0)
 					{
-						if (app.view.finalSpawn == app.view.myPlatformPoolingView[a])
-						{
-							Debug.Log(app.view.myPlatformPoolingView[a].myPlatformCactus);
-						}
+						Debug.Log(app.view.myPlatformPoolingView[0].myPlatformCactus);
 					}
 
 

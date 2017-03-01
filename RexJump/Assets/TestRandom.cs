@@ -39,14 +39,19 @@ public class TestRandom : MonoBehaviour
 //		{
 //			weightTotal += w;
 //		}
-//
+
 		for (int i = 0; i < myTestObject.Length; i++)
 		{
 			weightTotal += myTestObject[i].weights;
 		}
 
-		myFinalInt = RandomWeighted();
+
     }
+
+    void Update ()
+	{
+		myFinalInt = RandomWeighted();
+	}	
  
     int RandomWeighted () 
     {
