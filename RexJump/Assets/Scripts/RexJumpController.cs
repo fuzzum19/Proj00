@@ -15,6 +15,7 @@ public class RexJumpController : RexJumpElement
         Level    
     }
 
+    [ReadOnlyAttribute]
     public GameModes myGameModes;
 
     public enum GameStates
@@ -30,6 +31,7 @@ public class RexJumpController : RexJumpElement
         PlayerLoadingExit
     }
 
+    [ReadOnlyAttribute]
     public GameStates myGameStates;
 
     public enum UIStates
@@ -44,6 +46,7 @@ public class RexJumpController : RexJumpElement
         SceneLoadingExit
     }
 
+    [ReadOnlyAttribute]
     public UIStates myUIStates;
 
     //========================================================================//
@@ -1630,46 +1633,45 @@ public class RexJumpController : RexJumpElement
                     // app.view.newCactusRight = app.view.myRightCactusList[0].cactus.GetPooledObject();
                     // app.view.cactusRightSpriteRenderer = app.view.newCactusRight.GetComponent<SpriteRenderer>();
 					app.view.newPlatform = app.view.myPlatformPoolingView [0].myPlatformCactus.GetPooledObject ();
-					break;
+
+				break;
 
 				case 1: // Level 1
 
 					app.view.finalSpawn = RandomWeighted();
 
-					if (app.view.finalSpawn == 0)
-					{
-						Debug.Log(app.view.myPlatformPoolingView[0].myPlatformCactus);
-					}
+					Debug.Log(app.view.finalSpawn);
 
-
-					if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [1].platformProbability)
+					if (app.view.finalSpawn == 1)
 					{
 						app.view.newPlatform = app.view.myPlatformPoolingView [1].myPlatformCactus.GetPooledObject ();
 					}
-					else if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [2].platformProbability)
+					else if (app.view.finalSpawn == 2)
 					{
 						app.view.newPlatform = app.view.myPlatformPoolingView [2].myPlatformCactus.GetPooledObject ();
 					}
-					else if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [3].platformProbability)
+					else if (app.view.finalSpawn == 3)
 					{
 						app.view.newPlatform = app.view.myPlatformPoolingView [3].myPlatformCactus.GetPooledObject ();
 					}
-					else if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [4].platformProbability)
+					else if (app.view.finalSpawn == 4)
 					{
 						app.view.newPlatform = app.view.myPlatformPoolingView [4].myPlatformCactus.GetPooledObject ();
 					}
-					else if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [5].platformProbability)
+					else if (app.view.finalSpawn == 5)
 					{
 						app.view.newPlatform = app.view.myPlatformPoolingView [5].myPlatformCactus.GetPooledObject ();
 					}
-					else if (Random.Range (0f, 1f) <= app.view.myPlatformPoolingView [6].platformProbability)
+					else if (app.view.finalSpawn == 6)
 					{
 						app.view.newPlatform = app.view.myPlatformPoolingView [6].myPlatformCactus.GetPooledObject ();
 					}
-                    else
-                    {
-						app.view.newPlatform = app.view.myPlatformPoolingView[2].myPlatformCactus.GetPooledObject();
-                    }
+
+                break;
+
+                case 2: // Level 2
+
+                	
 
                 break;
 

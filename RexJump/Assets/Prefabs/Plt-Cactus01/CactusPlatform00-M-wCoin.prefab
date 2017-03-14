@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 4865306664936276}
   - component: {fileID: 114664121611839630}
   m_Layer: 0
-  m_Name: CactusPlatform01-M-wCoin
+  m_Name: CactusPlatform00-M-wCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
