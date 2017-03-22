@@ -60,7 +60,7 @@ public class RexJumpModel : RexJumpElement
 	public float speedMultiplier;
 
 	[Space(20)]
-	[Header(" --- Platform Difficulty --- ")]
+	[Header(" --- Level Difficulty --- ")]
     public int levelDifficulty; 
 
 	[Space(20)]

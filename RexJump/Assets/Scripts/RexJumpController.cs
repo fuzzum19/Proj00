@@ -335,17 +335,33 @@ public class RexJumpController : RexJumpElement
     }
 
     // Random weight method
-    public int RandomWeighted ()
+    public int RandomWeightedLevel1 ()
 	{
 		int result = 0;
 		int total = 0;
 		int randomValue = Random.Range (0, app.view.weightTotal);
 
-		for (result = 0; result < app.view.myPlatformPoolingView.Length; result++)
+		for (result = 0; result < app.view.level1CactusSet.Length; result++)
 		{
-			total += app.view.myPlatformPoolingView[result].platformProbability;
+			total += app.view.level1CactusSet[result].level1CactusProbability;
 
 			if (total > randomValue ) break;
+		}
+
+		return result;
+	}
+
+	public int RandomWeightedLevel2 ()
+	{
+		int result = 0;
+		int total = 0;
+		int randomValue = Random.Range (0, app.view.weightTotal);
+
+		for (result = 0; result < app.view.level2CactusSet.Length; result++)
+		{
+			total += app.view.level2CactusSet[result].level2CactusProbability;
+
+			if (total > randomValue) break;
 		}
 
 		return result;
@@ -1353,11 +1369,6 @@ public class RexJumpController : RexJumpElement
 			// Set weight spawn of Platforms
 			app.view.weightTotal = 0;
 
-			for (int t = 0; t < app.view.myPlatformPoolingView.Length; t++)
-			{
-				app.view.weightTotal += app.view.myPlatformPoolingView[t].platformProbability;
-			}
-
             app.view.tapToPlayStartLoop = false;
         }
     }
@@ -1632,47 +1643,117 @@ public class RexJumpController : RexJumpElement
 				case 0: // Level 0
                     // app.view.newCactusRight = app.view.myRightCactusList[0].cactus.GetPooledObject();
                     // app.view.cactusRightSpriteRenderer = app.view.newCactusRight.GetComponent<SpriteRenderer>();
-					app.view.newPlatform = app.view.myPlatformPoolingView [0].myPlatformCactus.GetPooledObject ();
+					app.view.newPlatform = app.view.level1CactusSet [0].level1Cactus.GetPooledObject ();
 
-				break;
+					break;
 
 				case 1: // Level 1
 
-					app.view.finalSpawn = RandomWeighted();
+					app.view.weightTotal = 
+					app.view.level1CactusSet[0].level1CactusProbability + 
+					app.view.level1CactusSet[1].level1CactusProbability +
+					app.view.level1CactusSet[2].level1CactusProbability +
+					app.view.level1CactusSet[3].level1CactusProbability +
+					app.view.level1CactusSet[4].level1CactusProbability +
+					app.view.level1CactusSet[5].level1CactusProbability;
 
-					Debug.Log(app.view.finalSpawn);
+					app.view.finalSpawn = RandomWeightedLevel1 ();
 
-					if (app.view.finalSpawn == 1)
+					Debug.Log (app.view.finalSpawn);
+
+					if (app.view.finalSpawn == 0)
 					{
-						app.view.newPlatform = app.view.myPlatformPoolingView [1].myPlatformCactus.GetPooledObject ();
+						app.view.newPlatform = app.view.level1CactusSet [0].level1Cactus.GetPooledObject ();
+					}
+					else if (app.view.finalSpawn == 1)
+					{
+						app.view.newPlatform = app.view.level1CactusSet [1].level1Cactus.GetPooledObject ();
 					}
 					else if (app.view.finalSpawn == 2)
 					{
-						app.view.newPlatform = app.view.myPlatformPoolingView [2].myPlatformCactus.GetPooledObject ();
+						app.view.newPlatform = app.view.level1CactusSet [2].level1Cactus.GetPooledObject ();
 					}
 					else if (app.view.finalSpawn == 3)
 					{
-						app.view.newPlatform = app.view.myPlatformPoolingView [3].myPlatformCactus.GetPooledObject ();
+						app.view.newPlatform = app.view.level1CactusSet [3].level1Cactus.GetPooledObject ();
 					}
 					else if (app.view.finalSpawn == 4)
 					{
-						app.view.newPlatform = app.view.myPlatformPoolingView [4].myPlatformCactus.GetPooledObject ();
+						app.view.newPlatform = app.view.level1CactusSet [4].level1Cactus.GetPooledObject ();
 					}
 					else if (app.view.finalSpawn == 5)
 					{
-						app.view.newPlatform = app.view.myPlatformPoolingView [5].myPlatformCactus.GetPooledObject ();
+						app.view.newPlatform = app.view.level1CactusSet [5].level1Cactus.GetPooledObject ();
+					}
+
+					break;
+
+				case 2: // Level 2
+
+					app.view.weightTotal = 
+					app.view.level2CactusSet[0].level2CactusProbability + 
+					app.view.level2CactusSet[1].level2CactusProbability +
+					app.view.level2CactusSet[2].level2CactusProbability + 
+					app.view.level2CactusSet[3].level2CactusProbability +
+					app.view.level2CactusSet[4].level2CactusProbability + 
+					app.view.level2CactusSet[5].level2CactusProbability +
+					app.view.level2CactusSet[6].level2CactusProbability + 
+					app.view.level2CactusSet[7].level2CactusProbability +
+					app.view.level2CactusSet[8].level2CactusProbability + 
+					app.view.level2CactusSet[9].level2CactusProbability +
+					app.view.level2CactusSet[10].level2CactusProbability + 
+					app.view.level2CactusSet[11].level2CactusProbability;
+
+					app.view.finalSpawn = RandomWeightedLevel2 ();
+
+					if (app.view.finalSpawn == 0)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [0].level2Cactus.GetPooledObject ();
+					}
+					else if (app.view.finalSpawn == 1)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [1].level2Cactus.GetPooledObject ();
+					}
+					else if (app.view.finalSpawn == 2)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [2].level2Cactus.GetPooledObject ();
+					}
+					else if (app.view.finalSpawn == 3)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [3].level2Cactus.GetPooledObject ();
+					}
+					else if (app.view.finalSpawn == 4)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [4].level2Cactus.GetPooledObject ();
+					}
+					else if (app.view.finalSpawn == 5)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [5].level2Cactus.GetPooledObject ();
 					}
 					else if (app.view.finalSpawn == 6)
 					{
-						app.view.newPlatform = app.view.myPlatformPoolingView [6].myPlatformCactus.GetPooledObject ();
+						app.view.newPlatform = app.view.level2CactusSet [6].level2Cactus.GetPooledObject ();
 					}
-
-                break;
-
-                case 2: // Level 2
-
-                	
-
+					else if (app.view.finalSpawn == 7)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [7].level2Cactus.GetPooledObject ();
+					}
+					else if (app.view.finalSpawn == 8)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [8].level2Cactus.GetPooledObject ();
+					}
+					else if (app.view.finalSpawn == 9)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [9].level2Cactus.GetPooledObject ();
+					}
+					else if (app.view.finalSpawn == 10)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [10].level2Cactus.GetPooledObject ();
+					}
+					else if (app.view.finalSpawn == 11)
+					{
+						app.view.newPlatform = app.view.level2CactusSet [11].level2Cactus.GetPooledObject ();
+					}
                 break;
 
             }

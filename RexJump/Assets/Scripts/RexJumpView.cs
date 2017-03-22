@@ -173,19 +173,35 @@ public class RexJumpView : RexJumpElement
 
 	public int[] mySpawnChance;
 
-	[System.Serializable]
-    public struct PlatformPoolingView
-	{
-		public bool hasCoin;
-		[Range(0, 100)]
-		public int platformProbability;
-		public ObjectPooler myPlatformCactus;
-	}
-	public PlatformPoolingView[] myPlatformPoolingView;
+	// **************
+
 	[ReadOnlyAttribute]
 	public int weightTotal;
 	[ReadOnlyAttribute]
 	public int finalSpawn;
+
+	// **************
+
+	[System.Serializable]
+    public struct Level1CactusSetPool
+	{
+		public bool level1CactusHasCoin;
+		[Range(0, 100)]
+		public int level1CactusProbability;
+		public ObjectPooler level1Cactus;
+	}
+	public Level1CactusSetPool[] level1CactusSet;
+
+
+	[System.Serializable]
+	public struct Level2CactusSetPool
+	{
+		public bool level2CactusHasCoin;
+		[Range(0, 100)]
+		public int level2CactusProbability;
+		public ObjectPooler level2Cactus;
+	}
+	public Level2CactusSetPool[] level2CactusSet;
 
     #region EndPool
     [Space(20)]
