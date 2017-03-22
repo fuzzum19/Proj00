@@ -62,6 +62,7 @@ public class RexJumpModel : RexJumpElement
 	[Space(20)]
 	[Header(" --- Level Difficulty --- ")]
     public int levelDifficulty; 
+     
 
 	[Space(20)]
 	[Header(" --- Coin Settings --- ")]
@@ -75,7 +76,9 @@ public class RexJumpModel : RexJumpElement
 	[Space(20)]
 	[Header(" --- Score Settings --- ")]
 	public float pointsPerSecond;
+	[ReadOnlyAttribute]
 	public float scoreCount;
+	[ReadOnlyAttribute]
 	public float highScoreCount;
     // Used by Event Handler
 	public bool scoreIncreasing { get; set; }

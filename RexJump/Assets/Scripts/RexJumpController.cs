@@ -367,6 +367,15 @@ public class RexJumpController : RexJumpElement
 		return result;
 	}
 
+	// Level tuner
+	public void LevelChangeDifficulty ()
+	{
+		if (app.model.scoreCount >= 41)
+		{
+			app.model.levelDifficulty = 2;
+		}
+	}
+
     //========================================================================//
 
     public void GameStateManager()
@@ -681,6 +690,7 @@ public class RexJumpController : RexJumpElement
                 app.view.myStartScreenClass[3].start_thisCanvasGroup.blocksRaycasts = false;
                 app.view.myStartScreenClass[3].start_text.raycastTarget = false;
 
+                LevelChangeDifficulty();
                 PlatformGeneration();
 
                 // Environment Init

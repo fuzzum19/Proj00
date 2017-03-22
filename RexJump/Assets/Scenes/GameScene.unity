@@ -3830,7 +3830,7 @@ MonoBehaviour:
   speedIncreaseMilestone: 30
   speedIncreaseMilestoneStore: 0
   speedMultiplier: 1.05
-  levelDifficulty: 2
+  levelDifficulty: 1
   coinRotate: 35
   coinsToGive: 1
   coinsCount: 0
