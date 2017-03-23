@@ -170,38 +170,26 @@ public class RexJumpView : RexJumpElement
 	[Header(" --- Environment Pooling View --- ")]
 	[Space(10)]
 	private float myNull000;
-
-	public int[] mySpawnChance;
-
 	// **************
 
 	[ReadOnlyAttribute]
 	public int weightTotal;
 	[ReadOnlyAttribute]
 	public int finalSpawn;
-
+	[ReadOnlyAttribute]
+	public int currentLevel;
 	// **************
 
 	[System.Serializable]
-    public struct Level1CactusSetPool
+	public struct LevelCactusSetPool
 	{
-		public bool level1CactusHasCoin;
+		public bool levelCactusHasCoin;
 		[Range(0, 100)]
-		public int level1CactusProbability;
-		public ObjectPooler level1Cactus;
+		public int levelCactusProbability;
+		public ObjectPooler levelCactus;
 	}
-	public Level1CactusSetPool[] level1CactusSet;
+	public LevelCactusSetPool[] levelCactusSet;
 
-
-	[System.Serializable]
-	public struct Level2CactusSetPool
-	{
-		public bool level2CactusHasCoin;
-		[Range(0, 100)]
-		public int level2CactusProbability;
-		public ObjectPooler level2Cactus;
-	}
-	public Level2CactusSetPool[] level2CactusSet;
 
     #region EndPool
     [Space(20)]

@@ -6777,65 +6777,46 @@ MonoBehaviour:
   maxHeightPlatforms: {fileID: 645496388}
   platformGeneratorPos: {fileID: 1704255359}
   platformGenRange: {fileID: 2032627897}
-  mySpawnChance: 
   weightTotal: 0
   finalSpawn: 0
-  level1CactusSet:
-  - level1CactusHasCoin: 0
-    level1CactusProbability: 70
-    level1Cactus: {fileID: 1921856999}
-  - level1CactusHasCoin: 1
-    level1CactusProbability: 30
-    level1Cactus: {fileID: 1940582906}
-  - level1CactusHasCoin: 0
-    level1CactusProbability: 70
-    level1Cactus: {fileID: 448133429}
-  - level1CactusHasCoin: 1
-    level1CactusProbability: 30
-    level1Cactus: {fileID: 1907859159}
-  - level1CactusHasCoin: 0
-    level1CactusProbability: 70
-    level1Cactus: {fileID: 1965221786}
-  - level1CactusHasCoin: 1
-    level1CactusProbability: 30
-    level1Cactus: {fileID: 1974071104}
-  level2CactusSet:
-  - level2CactusHasCoin: 0
-    level2CactusProbability: 30
-    level2Cactus: {fileID: 1921856999}
-  - level2CactusHasCoin: 1
-    level2CactusProbability: 15
-    level2Cactus: {fileID: 1940582906}
-  - level2CactusHasCoin: 0
-    level2CactusProbability: 30
-    level2Cactus: {fileID: 448133429}
-  - level2CactusHasCoin: 1
-    level2CactusProbability: 15
-    level2Cactus: {fileID: 1907859159}
-  - level2CactusHasCoin: 0
-    level2CactusProbability: 30
-    level2Cactus: {fileID: 1965221786}
-  - level2CactusHasCoin: 1
-    level2CactusProbability: 15
-    level2Cactus: {fileID: 1974071104}
-  - level2CactusHasCoin: 0
-    level2CactusProbability: 70
-    level2Cactus: {fileID: 488373329}
-  - level2CactusHasCoin: 1
-    level2CactusProbability: 30
-    level2Cactus: {fileID: 2124230582}
-  - level2CactusHasCoin: 0
-    level2CactusProbability: 70
-    level2Cactus: {fileID: 1405677538}
-  - level2CactusHasCoin: 1
-    level2CactusProbability: 30
-    level2Cactus: {fileID: 112574433}
-  - level2CactusHasCoin: 0
-    level2CactusProbability: 70
-    level2Cactus: {fileID: 1552429872}
-  - level2CactusHasCoin: 1
-    level2CactusProbability: 30
-    level2Cactus: {fileID: 1328302753}
+  currentLevel: 0
+  levelCactusSet:
+  - levelCactusHasCoin: 0
+    levelCactusProbability: 0
+    levelCactus: {fileID: 1921856999}
+  - levelCactusHasCoin: 1
+    levelCactusProbability: 0
+    levelCactus: {fileID: 1940582906}
+  - levelCactusHasCoin: 0
+    levelCactusProbability: 0
+    levelCactus: {fileID: 448133429}
+  - levelCactusHasCoin: 1
+    levelCactusProbability: 0
+    levelCactus: {fileID: 1907859159}
+  - levelCactusHasCoin: 0
+    levelCactusProbability: 0
+    levelCactus: {fileID: 1965221786}
+  - levelCactusHasCoin: 1
+    levelCactusProbability: 0
+    levelCactus: {fileID: 1974071104}
+  - levelCactusHasCoin: 0
+    levelCactusProbability: 0
+    levelCactus: {fileID: 488373329}
+  - levelCactusHasCoin: 1
+    levelCactusProbability: 0
+    levelCactus: {fileID: 2124230582}
+  - levelCactusHasCoin: 0
+    levelCactusProbability: 0
+    levelCactus: {fileID: 1405677538}
+  - levelCactusHasCoin: 1
+    levelCactusProbability: 0
+    levelCactus: {fileID: 112574433}
+  - levelCactusHasCoin: 0
+    levelCactusProbability: 0
+    levelCactus: {fileID: 1552429872}
+  - levelCactusHasCoin: 1
+    levelCactusProbability: 0
+    levelCactus: {fileID: 1328302753}
   endPools:
   - {fileID: 1683208233460202, guid: b5c19a54b5f8b4653b8142d5b68b5aee, type: 2}
   endlessScroller: {fileID: 936068817}
